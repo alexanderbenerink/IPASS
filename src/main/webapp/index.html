@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Enter codeword</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="hero is-large">
+        <main>
+            <div class="hero-body">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <form id="postcodeword">
+                            <h1 class="title">
+                                Enter codeword
+                            </h1>
+                            <p class="subtitle">
+                                To continue, enter the <strong>codeword</strong>
+                            </p>
+                            <div class="columns is-centered">
+                                <div class="column is-3 has-text-centered">
+                                    <div class="field">
+                                        <p class="control has-icons-left">
+                                            <input type="text" id="codeword" class="input" placeholder="Enter codeword" title="Input for password">
+                                            <span class="icon is-small is-left">
+                                              <i class="fas fa-lock"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <p class="control">
+                                    <input type="submit" id="send_json" onclick="sendJsonData()" class="button" value="Submit" title="Button for submitting the codeword">
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+    <script type="application/javascript" src="js/functions.js"></script>
+</body>
+</html>
