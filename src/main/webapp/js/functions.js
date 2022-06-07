@@ -1,3 +1,13 @@
+// document.getElementById("send_json").addEventListener("click", function(event) {
+//     event.preventDefault();
+//     sendJsonData();
+// });
+
+document.getElementById("postcodeword").addEventListener("submit", function(event) {
+    event.preventDefault();
+    sendJsonData();
+});
+
 async function sendJsonData(event) {
     const codeword = document.getElementById("codeword")
 
