@@ -16,7 +16,7 @@ public class SpeakeasyResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response enterHomePage(String jsonBody) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, String> map = objectMapper.readValue(jsonBody, new TypeReference<Map<String, String>>() {});
+        Map<String, String> map = objectMapper.readValue(jsonBody, new TypeReference<>() {});
 
         // TODO: add persistence to passphrase so it can be changed by the admin later
         if (map.get("codeword").equals("Welkom01")) {

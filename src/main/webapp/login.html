@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | Tommy Bishoppe</title>
+
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+<section>
+  <main class="hero is-fullheight">
+    <!-- Navigation -->
+    <div class="hero-head">
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <div class="columns">
+              <a href="home.html" class="navbar-item" title="Go to home">
+                <div class="column">
+                  <span class="title">Tommy Bishoppe</span>
+                </div>
+                <div class="column">
+                  <span class="subtitle">Graphic Designer & Illustrator</span>
+                </div>
+              </a>
+            </div>
+            <!--                            <a class="navbar-item">-->
+            <!--                                <img src="https://versions.bulma.io/0.7.0/images/bulma-type-white.png" alt="Logo">-->
+            <!--                            </a>-->
+            <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                            </span>
+          </div>
+          <div id="navbarMenuHeroA" class="navbar-menu">
+            <div class="navbar-end">
+              <a href="products.html" class="navbar-item" title="Go to products">
+                Products
+              </a>
+              <a href="login.html" class="navbar-item is-active" title="Go to login">
+                Login
+              </a>
+              <a href="register.html" class="navbar-item" title="Go to register">
+                Register
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- Body -->
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="columns is-multiline is-centered">
+          <div class="column is-3">
+            <h1 class="title">
+              Login to your account
+            </h1>
+            <hr>
+            <form id="loginForm">
+              <div class="field">
+                <label>
+                  <p class="subtitle">Username</p>
+                  <input id="loginUsername" type="text" class="input" placeholder="Username/E-mail" required>
+                </label>
+              </div>
+              <br>
+              <div class="field">
+                <label>
+                  <p class="subtitle">Password</p>
+                  <input id="loginPassword" type="password" class="input" placeholder="Password" required>
+                </label>
+              </div>
+              <hr>
+              <div class="field">
+                <button type="submit" class="button">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="hero-foot">
+      <nav class="tabs">
+        <div class="container">
+          <ul>
+            <li>© <script>document.write(new Date().getFullYear())</script></li>
+            <li class="active-on-hover"><a href="http://tommybishoppe.com/" target="_blank">Portfolio</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </main>
+</section>
+<script type="application/javascript" src="js/functions.js"></script>
+</body>
+</html>

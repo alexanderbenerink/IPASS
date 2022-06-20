@@ -1,18 +1,23 @@
-// document.getElementById("send_json").addEventListener("click", function(event) {
-//     event.preventDefault();
-//     sendJsonData();
-// });
+/*
+* Constants
+*/
 
-document.getElementById("postcodeword").addEventListener("submit", function(event) {
-    event.preventDefault();
-    sendJsonData();
-});
+const START_INDEX = 0;
+const MAX_COLUMNS = 3;
+
+const CODEWORD_FORM = document.getElementById("postcodeword")
+const REGISTER_FORM = document.getElementById("registerForm")
+const LOGIN_FORM = document.getElementById("loginForm")
+
+/*
+* Functions
+*/
 
 async function sendJsonData(event) {
-    const codeword = document.getElementById("codeword")
+    const CODEWORD = document.getElementById("codeword");
 
     let jsonRequestBody = {
-        "codeword": codeword.value
+        "codeword": CODEWORD.value
     };
 
     let fetchOptions = {
@@ -21,7 +26,7 @@ async function sendJsonData(event) {
         headers: {'Content-Type': 'application/json'}
     }
 
-    fetch("/restservices/codeword", fetchOptions).then(response => {
+    await fetch("/restservices/codeword", fetchOptions).then(response => {
         if (response.ok) {
             console.log(response.status)
             console.log("Codeword is correct!\nRedirecting...");
@@ -29,6 +34,148 @@ async function sendJsonData(event) {
         } else {
             console.log(response.status)
             console.log("Codeword was incorrect, try again.");
+            throw new Error(error);
         }
+    }).catch((error) => {
+        CODEWORD.classList.add("input-error");
     });
+}
+
+async function showMostPopularItems() {
+    await fetch("restservices/product").then(e => e.json()).then(json => {
+        const PRODUCT = json;
+        const CONTAINER = document.getElementById("itemContainer");
+        const TEMPLATE = document.getElementById("itemTile");
+        let count = START_INDEX;
+
+        for (let i = START_INDEX; i < PRODUCT.length; i++) {
+            if (count <= MAX_COLUMNS - 1) {
+                const NEW_ITEM = TEMPLATE.content.firstElementChild.cloneNode(true);
+
+                NEW_ITEM.querySelector("#itemTitle").textContent = PRODUCT[i].Title;
+                NEW_ITEM.querySelector("img").src = PRODUCT[i].Image;
+                NEW_ITEM.querySelector("#itemDescription").textContent = PRODUCT[i].Description;
+
+                CONTAINER.appendChild(NEW_ITEM);
+                count++;
+            }
+        }
+    }).catch(error => console.log(error));
+}
+
+async function showAllItems() {
+    await fetch("restservices/product").then(e => e.json()).then(json => {
+        const PRODUCT = json;
+        const CONTAINER = document.getElementById("itemContainer");
+        const TEMPLATE = document.getElementById("itemTile");
+
+        for (let i = START_INDEX; i < PRODUCT.length; i++) {
+            const NEW_ITEM = TEMPLATE.content.firstElementChild.cloneNode(true);
+
+            NEW_ITEM.querySelector("#itemTitle").textContent = PRODUCT[i].Title;
+            NEW_ITEM.querySelector("img").src = PRODUCT[i].Image;
+            NEW_ITEM.querySelector("#itemDescription").textContent = PRODUCT[i].Description;
+
+            CONTAINER.appendChild(NEW_ITEM);
+        }
+    }).catch(error => console.log(error));
+}
+
+ function registerNewAccount() {
+    const USERNAME = document.getElementById("usernameField");
+    const EMAIL = document.getElementById("emailField");
+    const PASSWORD = document.getElementById("passwordField");
+
+    let jsonRequestBody = {
+        "username": USERNAME.value,
+        "email": EMAIL.value,
+        "password": PASSWORD.value
+    }
+
+    let fetchOptions = {
+        method: "POST",
+        body: JSON.stringify(jsonRequestBody),
+        headers: {'Content-Type': 'application/json'}
+    }
+
+    fetch('restservices/account/create', fetchOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.status);
+            }
+            return window.location.replace("login.html");
+        })
+        .catch((error) => {
+            const STATUS_ALREADY_EXISTS = 409;
+            let message = error;
+
+            if (Number(error.message) === STATUS_ALREADY_EXISTS) {
+                message = "Account already exists!";
+            }
+            //TODO: Errors are now logged in console, but make it user-friendly by showing it on page
+            throw new Error(message);
+        });
+}
+
+function loginToAccount() {
+    const USERNAME = document.getElementById("loginUsername");
+    const PASSWORD = document.getElementById("loginPassword");
+
+    let jsonRequestBody = {
+        "username": USERNAME.value,
+        "password": PASSWORD.value
+    }
+
+    let fetchOptions = {
+        method: "POST",
+        body: JSON.stringify(jsonRequestBody),
+        headers: {'Content-Type': 'application/json'}
+    }
+
+    fetch('restservices/account/login', fetchOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.status);
+            }
+
+            //TODO: Receive JWT token and save to localstorage so you have a different state? (USE BATTLESNAKE)
+
+            return console.log(response.status + "\nSuccesful login.")
+            // return window.location.replace("login.html");
+        })
+        .catch((error) => {
+            const STATUS_BAD_LOGIN = 401;
+            let message = error;
+
+            if (Number(error.message) === STATUS_BAD_LOGIN) {
+                message = "Account doesn't exist!";
+            }
+            //TODO: Errors are now logged in console, but make it user-friendly by showing it on page
+            throw new Error(message);
+        })
+}
+
+/*
+* EventListeners
+*/
+
+if (CODEWORD_FORM){
+    CODEWORD_FORM.addEventListener("submit", function(event) {
+        event.preventDefault();
+        sendJsonData();
+    });
+}
+
+if (REGISTER_FORM) {
+    REGISTER_FORM.addEventListener("submit", function(event) {
+        event.preventDefault();
+        registerNewAccount();
+    })
+}
+
+if (LOGIN_FORM) {
+    LOGIN_FORM.addEventListener("submit", function(event) {
+        event.preventDefault();
+        loginToAccount();
+    })
 }
