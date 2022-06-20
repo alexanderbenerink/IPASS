@@ -1,6 +1,7 @@
 package nl.hu.ipass.domain.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,6 +50,14 @@ public class Product {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public static List<Product> getAlleProducten() {
+        return Collections.unmodifiableList(alleProducten);
+    }
+
+    public Product getProduct(String name) {
+        return alleProducten.stream().filter(e -> e.getTitel().equals(name)).findFirst().orElse(null);
     }
 
     @Override
