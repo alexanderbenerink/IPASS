@@ -27,21 +27,16 @@ function refresh() {
         if (LOGIN_BUTTON && REGISTER_BUTTON) {
             LOGIN_BUTTON.style = "display:none";
             REGISTER_BUTTON.style = "display:none";
-            // ACCOUNT_BUTTON.style = "display:block"
+            ACCOUNT_BUTTON.style = "display:inherit"
+            LOGOUT_BUTTON.style = "display:inherit"
         }
-        // if (LOGIN_FORM || LOGOUT_FORM) {
-        //     LOGIN_FORM.style = "display:none";
-        //     LOGOUT_FORM.style = "display:block";
-        // }
     } else {
         if (ACCOUNT_BUTTON && LOGOUT_BUTTON) {
             ACCOUNT_BUTTON.style = "display:none"
             LOGOUT_BUTTON.style = "display:none"
+            LOGIN_BUTTON.style = "display:inherit";
+            REGISTER_BUTTON.style = "display:inherit";
         }
-        // if (LOGIN_FORM || LOGOUT_FORM) {
-        //     LOGOUT_FORM.style = "display:none";
-        //     LOGIN_FORM.style = "display:block";
-        // }
     }
 }
 
