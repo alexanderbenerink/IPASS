@@ -1,9 +1,8 @@
 package nl.hu.ipass.domain.webservices;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.hu.ipass.domain.model.Gebruiker;
+import nl.hu.ipass.domain.webservices.dto.ChangePasswordRequest;
+import nl.hu.ipass.domain.webservices.dto.RegistrationRequest;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
@@ -11,9 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Path("account")

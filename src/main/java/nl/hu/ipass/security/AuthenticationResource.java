@@ -4,6 +4,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 import nl.hu.ipass.domain.model.Gebruiker;
+import nl.hu.ipass.security.dto.LogonRequest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
