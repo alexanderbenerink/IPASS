@@ -9,7 +9,7 @@ import javax.ws.rs.ApplicationPath;
 @ApplicationPath("restservices")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
-        packages("nl.hu.ipass.domain.webservices, nl.hu.ipass.domain.security");
+        packages("nl.hu.ipass.domain.webservices, nl.hu.ipass.security");
         register(JacksonFeature.class);
         register(RolesAllowedDynamicFeature.class);
     }
