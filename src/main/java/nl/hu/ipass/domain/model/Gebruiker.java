@@ -1,28 +1,53 @@
 package nl.hu.ipass.domain.model;
 
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Gebruiker {
-    private String gebruikersnaam;
-    private String email;
-    private String wachtwoord;
+public class Gebruiker implements Principal {
+    private String gebruikersnaam, email, wachtwoord, rol;
     private static List<Gebruiker> alleGebruikers = new ArrayList<>();
 
     public Gebruiker(String gb, String em, String ww) {
         this.gebruikersnaam = gb;
         this.email = em;
         this.wachtwoord = ww;
-        if (!getAlleGebruikers().contains(this)) getAlleGebruikers().add(this);
+        this.rol = "user";
+//        if (alleGebruikers.contains(this)) addUser(gb, em, ww);
     }
 
-    public static List<Gebruiker> getAlleGebruikers() {
-        return alleGebruikers;
+    public boolean makeAdmin() {
+        this.rol = "admin";
+        return true;
     }
 
-    public String getGebruikersnaam() {
+    public static List<Gebruiker> getAlleGebruikers() { return Collections.unmodifiableList(alleGebruikers); }
+
+    @Override
+    public String getName() {
         return gebruikersnaam;
+    }
+
+    public static Gebruiker getUserByName(String username) {
+        for (Gebruiker myUser : alleGebruikers) {
+            if (myUser.gebruikersnaam.equals(username)) {
+                return myUser;
+            }
+        }
+        return null;
+    }
+
+    public static String validateLogin(String username, String password) {
+        // Find user based on username
+        // Verify password
+        // Return the role
+        Gebruiker found = Gebruiker.getUserByName(username);
+        if (found != null && found.wachtwoord.equals(password)) {
+            return found.rol;
+        }
+        return null;
     }
 
     public void setGebruikersnaam(String gebruikersnaam) {
@@ -45,9 +70,20 @@ public class Gebruiker {
         this.wachtwoord = wachtwoord;
     }
 
+    public String getRole() {
+        return rol;
+    }
+
+    public static void addUser(String username, String email, String password) {
+        Gebruiker toAdd = new Gebruiker(username, email, password);
+        if (!alleGebruikers.contains(toAdd)) {
+            alleGebruikers.add(toAdd);
+        }
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(gebruikersnaam);
+        return Objects.hash(gebruikersnaam, email, wachtwoord);
     }
 
     @Override

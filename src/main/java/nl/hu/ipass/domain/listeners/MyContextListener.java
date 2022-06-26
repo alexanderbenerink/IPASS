@@ -1,5 +1,6 @@
 package nl.hu.ipass.domain.listeners;
 
+import nl.hu.ipass.domain.model.Gebruiker;
 import nl.hu.ipass.domain.model.Product;
 
 import javax.servlet.ServletContextEvent;
@@ -18,6 +19,7 @@ public class MyContextListener implements ServletContextListener {
         Product product4 = new Product(4756, "Tattoo 4", "Een heel ander product", "https://i.imgur.com/DlFgABJ.jpg");
         Product product5 = new Product(1029, "Tattoo 5", "Een goed verkocht product", "https://i.imgur.com/DlFgABJ.jpg");
         Product product6 = new Product(3748, "Tattoo 6", "Een beter verkocht product", "https://i.imgur.com/DlFgABJ.jpg");
+        Gebruiker.addUser("Alexander", "alexander.benerink@outlook.com", "Welkom01");
     }
 
     @Override
