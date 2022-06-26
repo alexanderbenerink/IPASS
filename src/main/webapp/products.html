@@ -37,21 +37,27 @@
               <!--                                <img src="https://versions.bulma.io/0.7.0/images/bulma-type-white.png" alt="Logo">-->
               <!--                            </a>-->
               <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                            </span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </span>
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu">
               <div class="navbar-end">
                 <a href="products.html" class="navbar-item is-active" title="Go to products">
                   Products
                 </a>
-                <a href="login.html" class="navbar-item" title="Go to login">
+                <a id="loginbutton" href="login.html" class="navbar-item" title="Go to login">
                   Login
                 </a>
-                <a href="register.html" class="navbar-item" title="Go to register">
+                <a id="registerbutton" href="register.html" class="navbar-item" title="Go to register">
                   Register
+                </a>
+                <a id="accountbutton" href="account.html" class="navbar-item" title="Go to my account">
+                  Account
+                </a>
+                <a id="logoutbutton" href="#" class="navbar-item" title="Log out">
+                  Log out
                 </a>
               </div>
             </div>
@@ -105,5 +111,6 @@
     </main>
   </section>
   <script type="application/javascript" src="js/functions.js"></script>
+  <script type="module" src="js/login.js"></script>
 </body>
 </html>

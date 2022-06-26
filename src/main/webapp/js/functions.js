@@ -8,6 +8,7 @@ const MAX_COLUMNS = 3;
 const CODEWORD_FORM = document.getElementById("postcodeword")
 const REGISTER_FORM = document.getElementById("registerForm")
 const LOGIN_FORM = document.getElementById("loginForm")
+const MODIFY_PASSWORD_FORM = document.getElementById("modifyPasswordForm")
 
 /*
 * Functions
@@ -117,42 +118,73 @@ async function showAllItems() {
         });
 }
 
-function loginToAccount() {
-    const USERNAME = document.getElementById("loginUsername");
-    const PASSWORD = document.getElementById("loginPassword");
+// function loginToAccount() {
+//     const USERNAME = document.getElementById("loginUsername");
+//     const PASSWORD = document.getElementById("loginPassword");
+//
+//     let jsonRequestBody = {
+//         "username": USERNAME.value,
+//         "password": PASSWORD.value
+//     }
+//
+//     let fetchOptions = {
+//         method: "POST",
+//         body: JSON.stringify(jsonRequestBody),
+//         headers: {'Content-Type': 'application/json'}
+//     }
+//
+//     fetch('restservices/account/login', fetchOptions)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error(response.status);
+//             }
+//
+//             //TODO: Receive JWT token and save to localstorage so you have a different state? (USE BATTLESNAKE)
+//
+//             return console.log(response.status + "\nSuccesful login.")
+//             // return window.location.replace("login.html");
+//         })
+//         .catch((error) => {
+//             const STATUS_BAD_LOGIN = 401;
+//             let message = error;
+//
+//             if (Number(error.message) === STATUS_BAD_LOGIN) {
+//                 message = "Account doesn't exist!";
+//             }
+//             //TODO: Errors are now logged in console, but make it user-friendly by showing it on page
+//             throw new Error(message);
+//         })
+// }
+
+function changePassword() {
+    const OLD_PASSWORD = document.getElementById("oldpassword")
+    const NEW_PASSWORD = document.getElementById("newpassword")
+    const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT")
+    const URL = "http://localhost:8080/restservices/account/editpassword";
 
     let jsonRequestBody = {
-        "username": USERNAME.value,
-        "password": PASSWORD.value
+        "oldpassword": OLD_PASSWORD.value,
+        "newpassword": NEW_PASSWORD.value
     }
+
+    console.log(jsonRequestBody);
 
     let fetchOptions = {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify(jsonRequestBody),
-        headers: {'Content-Type': 'application/json'}
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + LOCAL_TOKEN
+        }
     }
 
-    fetch('restservices/account/login', fetchOptions)
+    fetch(URL, fetchOptions)
         .then(response => {
-            if (!response.ok) {
-                throw new Error(response.status);
+            if (response.ok) {
+                console.log("Password succesfully modified")
             }
-
-            //TODO: Receive JWT token and save to localstorage so you have a different state? (USE BATTLESNAKE)
-
-            return console.log(response.status + "\nSuccesful login.")
-            // return window.location.replace("login.html");
-        })
-        .catch((error) => {
-            const STATUS_BAD_LOGIN = 401;
-            let message = error;
-
-            if (Number(error.message) === STATUS_BAD_LOGIN) {
-                message = "Account doesn't exist!";
-            }
-            //TODO: Errors are now logged in console, but make it user-friendly by showing it on page
-            throw new Error(message);
-        })
+            // Do something else, like throw an error...
+        }).catch(error => console.log(error))
 }
 
 /*
@@ -178,4 +210,11 @@ if (LOGIN_FORM) {
         event.preventDefault();
         loginToAccount();
     })
+}
+
+if (MODIFY_PASSWORD_FORM){
+    MODIFY_PASSWORD_FORM.addEventListener("submit", function(event) {
+        event.preventDefault();
+        changePassword();
+    });
 }

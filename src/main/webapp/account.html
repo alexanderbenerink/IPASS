@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Account | Tommy Bishoppe</title>
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body onload="showAllItems()">
+<section>
+    <main class="hero is-fullheight">
+        <!-- Navigation -->
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <div class="columns">
+                            <a href="home.html" class="navbar-item" title="Go to home">
+                                <div class="column">
+                                    <span class="title">Tommy Bishoppe</span>
+                                </div>
+                                <div class="column">
+                                    <span class="subtitle">Graphic Designer & Illustrator</span>
+                                </div>
+                            </a>
+                        </div>
+                        <!--                            <a class="navbar-item">-->
+                        <!--                                <img src="https://versions.bulma.io/0.7.0/images/bulma-type-white.png" alt="Logo">-->
+                        <!--                            </a>-->
+                        <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </span>
+                    </div>
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="products.html" class="navbar-item is-active" title="Go to products">
+                                Products
+                            </a>
+                            <a id="loginbutton" href="login.html" class="navbar-item" title="Go to login">
+                                Login
+                            </a>
+                            <a id="registerbutton" href="register.html" class="navbar-item" title="Go to register">
+                                Register
+                            </a>
+                            <a id="accountbutton" href="account.html" class="navbar-item" title="Go to my account">
+                                Dashboard
+                            </a>
+                            <a id="logoutbutton" href="#" class="navbar-item" title="Log out">
+                                Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Body -->
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-4 has-text-centered">
+                        <p></p>
+                        <label>
+                            <h1 class="title">
+                                Account settings
+                            </h1>
+                        </label>
+                        <hr>
+                    </div>
+                </div>
+                <div class="columns">
+                    <!-- Items in wishlist here -->
+                    <div class="column has-text-centered">
+                        <p class="subtitle">Wishlist</p>
+                        <hr>
+                        <p>This feature is coming soon.</p>
+                    </div>
+                    <!-- Input fields for password change -->
+                    <div class="column">
+                        <form id="modifyPasswordForm">
+                            <p class="subtitle has-text-centered">Change password</p>
+                            <hr>
+                            <div class="field">
+                                <label for="oldpassword">
+                                    <p>Enter your old password:</p>
+                                    <br>
+                                    <input id="oldpassword" type="password" class="input" placeholder="Old password" required>
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label for="newpassword">
+                                    <p>Enter a new password:</p>
+                                    <br>
+                                    <input id="newpassword" type="password" class="input" placeholder="12 characters, a-Z and atleast 1 special character" required>
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label for="confirmnewpassword">
+                                    <p>Confirm new password</p>
+                                    <br>
+                                    <input id="confirmnewpassword" type="password" class="input" placeholder="Confirm new password">
+                                </label>
+                            </div>
+                            <hr>
+                            <div class="field has-text-centered">
+                                <button type="submit" class="button">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="hero-foot">
+            <nav class="tabs">
+                <div class="container">
+                    <ul>
+                        <li>© <script>document.write(new Date().getFullYear())</script></li>
+                        <li class="active-on-hover"><a href="http://tommybishoppe.com/" target="_blank">Portfolio</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </main>
+</section>
+<script type="application/javascript" src="js/functions.js"></script>
+<script type="module" src="js/login.js"></script>
+</body>
+</html>
