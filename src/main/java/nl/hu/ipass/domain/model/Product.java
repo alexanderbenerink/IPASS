@@ -17,7 +17,22 @@ public class Product {
         this.titel = tt;
         this.beschrijving = bs;
         this.foto = ft;
-        if (!alleProducten.contains(this)) alleProducten.add(this);
+    }
+
+    public static void addProduct(int article_number, String title, String image, String description) {
+        Product toAdd = new Product(article_number, title, image, description);
+        if (!alleProducten.contains(toAdd)) {
+            alleProducten.add(toAdd);
+        }
+    }
+
+    public static Product getProductByName(int article_number) {
+        for (Product product : alleProducten) {
+            if (product.artikelnummer == article_number) {
+                return product;
+            }
+        }
+        return null;
     }
 
     public int getArtikelnummer() {

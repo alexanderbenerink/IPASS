@@ -1,12 +1,15 @@
 package nl.hu.ipass.domain.webservices;
 
+import nl.hu.ipass.domain.model.Gebruiker;
 import nl.hu.ipass.domain.model.Product;
+import nl.hu.ipass.domain.webservices.dto.ProductRequest;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,5 +33,26 @@ public class ProductResource {
         });
 
         return Response.ok(list).build();
+    }
+
+    //TODO: Post methode where admin can add products
+    @POST
+    @Path("add")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin")
+    public Response addProduct(@Context SecurityContext sc, ProductRequest request) {
+        if (sc.getUserPrincipal() instanceof Gebruiker) {
+            Product existingProduct = Product.getProductByName(request.article_number);
+
+            if (existingProduct != null) {
+                return Response.status(Response.Status.CONFLICT).build();
+            }
+
+            Product.addProduct(request.article_number, request.title, request.image, request.description);
+            return Response.ok().build();
+        }
+
+        return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 }
