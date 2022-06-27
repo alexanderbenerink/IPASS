@@ -47,6 +47,13 @@ public class AccountResource {
 //        // Create new user and return a 200 response
 //        Gebruiker gebruiker = new Gebruiker(username, email, password);
 //        return Response.ok().build();
+        Gebruiker current = new Gebruiker(registrationRequest.username, registrationRequest.email, registrationRequest.password);
+        Gebruiker existing = Gebruiker.getUserByName(current.getName());
+
+        if (Gebruiker.getAlleGebruikers().contains(current) || existing != null) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
+
         Gebruiker.addUser(registrationRequest.username, registrationRequest.email, registrationRequest.password);
         System.out.println(Gebruiker.getAlleGebruikers());
         return Response.ok().build();

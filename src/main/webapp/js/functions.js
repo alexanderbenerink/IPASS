@@ -113,7 +113,7 @@ async function showAllItems() {
             let message = error;
 
             if (Number(error.message) === STATUS_ALREADY_EXISTS) {
-                message = "Account already exists!";
+                message = "An account with that username already exists!";
             }
             //TODO: Errors are now logged in console, but make it user-friendly by showing it on page
             throw new Error(message);
@@ -125,7 +125,7 @@ async function showAllItems() {
 //     const PASSWORD = document.getElementById("loginPassword");
 //
 //     let jsonRequestBody = {
-//         "username": USERNAME.value,
+//         "username": USERNAME.value,`
 //         "password": PASSWORD.value
 //     }
 //
