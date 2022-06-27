@@ -37,11 +37,8 @@ public class PersistenceManager {
                     ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
                     ObjectInputStream ois = new ObjectInputStream(bais);
 
-//                    Gebruiker loadedUsers = (Gebruiker) ois.readObject();
-//
-//                    Gebruiker.addUser(loadedUsers);
-                    //TODO: Load the users and set them. Code below doesn't work for now...
                     List<Gebruiker> loadedUsers = (List<Gebruiker>) ois.readObject();
+
                     for (Gebruiker user : loadedUsers) {
                         Gebruiker.addUser(user.getName(), user.getEmail(), user.getWachtwoord());
                     }

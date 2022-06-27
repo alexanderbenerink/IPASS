@@ -1,12 +1,13 @@
 package nl.hu.ipass.domain.model;
 
+import java.io.Serializable;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Gebruiker implements Principal {
+public class Gebruiker implements Principal, Serializable {
     private String gebruikersnaam, email, wachtwoord, rol;
     private static List<Gebruiker> alleGebruikers = new ArrayList<>();
 
