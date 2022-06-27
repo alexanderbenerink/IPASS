@@ -17,6 +17,16 @@ const LOGIN_BUTTON = document.links.loginbutton;
 const REGISTER_BUTTON = document.links.registerbutton;
 const LOGOUT_BUTTON = document.links.logoutbutton;
 
+const DISPLAY_USERNAME = document.getElementById("displayUsername");
+
+// Get the username of the user so we can display it in a webpage later
+let USERNAME;
+service.getUser().then(response => {
+    USERNAME = response.username;
+});
+
+console.log(USERNAME);
+
 
 /*
 * Functions
@@ -30,6 +40,7 @@ function refresh() {
             ACCOUNT_BUTTON.style = "display:inherit"
             LOGOUT_BUTTON.style = "display:inherit"
         }
+        if (DISPLAY_USERNAME) { DISPLAY_USERNAME.textContent = USERNAME }
     } else {
         if (ACCOUNT_BUTTON && LOGOUT_BUTTON) {
             ACCOUNT_BUTTON.style = "display:none"
