@@ -104,6 +104,8 @@ async function showAllItems() {
             if (!response.ok) {
                 throw new Error(response.status);
             }
+            console.log(response.status)
+            console.log("Registration is succesful!\nRedirecting...")
             return window.location.replace("login.html");
         })
         .catch((error) => {
@@ -184,6 +186,7 @@ function changePassword() {
                 console.log("Password succesfully modified")
             }
             // Do something else, like throw an error...
+            else throw "Wrong password"
         }).catch(error => console.log(error))
 }
 
