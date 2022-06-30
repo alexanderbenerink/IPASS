@@ -71,4 +71,13 @@ public class ProductResource {
 
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
+
+    @GET
+    @Path("{productId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getProduct(@PathParam("productId") int productId) {
+        Product current = Product.getProductByName(productId);
+        return Response.ok(current).build();
+    }
 }

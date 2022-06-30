@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product | Tommy Bishoppe</title>
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body onload="showItem()">
+<section>
+    <main class="hero is-fullheight">
+        <!-- Navigation -->
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <div class="columns">
+                            <a href="home.html" class="navbar-item" title="Go to home">
+                                <div class="column">
+                                    <span class="title">Tommy Bishoppe</span>
+                                </div>
+                                <div class="column">
+                                    <span class="subtitle">Graphic Designer & Illustrator</span>
+                                </div>
+                            </a>
+                        </div>
+                        <!--                            <a class="navbar-item">-->
+                        <!--                                <img src="https://versions.bulma.io/0.7.0/images/bulma-type-white.png" alt="Logo">-->
+                        <!--                            </a>-->
+                        <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </span>
+                    </div>
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="products.html" class="navbar-item" title="Go to products">
+                                Products
+                            </a>
+                            <a id="loginbutton" href="login.html" class="navbar-item" title="Go to login">
+                                Login
+                            </a>
+                            <a id="registerbutton" href="register.html" class="navbar-item" title="Go to register">
+                                Register
+                            </a>
+                            <a id="accountbutton" href="account.html" class="navbar-item" title="Go to my account">
+                                Account
+                            </a>
+                            <a id="logoutbutton" href="#" class="navbar-item" title="Log out">
+                                Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Body -->
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="columns">
+                    <div class="column">
+                        <img id="image" src="#" alt="Image of product" width="400">
+                    </div>
+                    <div class="column">
+                        <h1 id="title" class="title">Product</h1>
+                        <blockquote id="description">Description</blockquote>
+                    </div>
+                </div>
+                <hr>
+                <form id="reservationForm">
+                    <h1 class="title">Get this item</h1>
+                    <div class="columns is-centered">
+                        <div class="column is-3">
+                            <br>
+                            <div class="field">
+                                <label for="firstName">First name:</label>
+                                <input id="firstName" type="text" class="input">
+                            </div>
+                            <div class="field">
+                                <label for="email">E-mail:</label>
+                                <input id="email" type="email" class="input" required>
+                            </div>
+                            <div class="field">
+                                <label for="message">Message:</label>
+                                <textarea id="message" class="input"></textarea>
+                            </div>
+                            <div class="field">
+                                <button id="sendMessage" class="button" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="hero-foot">
+            <nav class="tabs">
+                <div class="container">
+                    <ul>
+                        <li>© <script>document.write(new Date().getFullYear())</script></li>
+                        <li class="active-on-hover"><a href="http://tommybishoppe.com/" target="_blank">Portfolio</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </main>
+</section>
+<script type="application/javascript" src="js/functions.js"></script>
+<script type="module" src="js/login.js"></script>
+</body>
+</html>

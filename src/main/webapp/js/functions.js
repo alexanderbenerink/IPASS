@@ -9,6 +9,7 @@ const CODEWORD_FORM = document.getElementById("postcodeword")
 const REGISTER_FORM = document.getElementById("registerForm")
 const LOGIN_FORM = document.getElementById("loginForm")
 const MODIFY_PASSWORD_FORM = document.getElementById("modifyPasswordForm")
+const PRODUCT_FORM = document.getElementById("reservationForm")
 
 /*
 * Functions
@@ -53,9 +54,10 @@ async function showMostPopularItems() {
             if (count <= MAX_COLUMNS - 1) {
                 const NEW_ITEM = TEMPLATE.content.firstElementChild.cloneNode(true);
 
+                NEW_ITEM.querySelector("#goToProductPage").setAttribute("href", "product.html#" + PRODUCT[i].Article_number);
                 NEW_ITEM.querySelector("#itemTitle").textContent = PRODUCT[i].Title;
                 NEW_ITEM.querySelector("img").src = PRODUCT[i].Image;
-                NEW_ITEM.querySelector("#itemDescription").textContent = PRODUCT[i].Description;
+                NEW_ITEM.querySelector("#itemDescription").textContent = shortDescription(PRODUCT[i].Description, 75);
 
                 CONTAINER.appendChild(NEW_ITEM);
                 count++;
@@ -73,9 +75,10 @@ async function showAllItems() {
         for (let i = START_INDEX; i < PRODUCT.length; i++) {
             const NEW_ITEM = TEMPLATE.content.firstElementChild.cloneNode(true);
 
+            NEW_ITEM.querySelector("#goToProductPage").setAttribute("href", "product.html#" + PRODUCT[i].Article_number);
             NEW_ITEM.querySelector("#itemTitle").textContent = PRODUCT[i].Title;
             NEW_ITEM.querySelector("img").src = PRODUCT[i].Image;
-            NEW_ITEM.querySelector("#itemDescription").textContent = PRODUCT[i].Description;
+            NEW_ITEM.querySelector("#itemDescription").textContent = shortDescription(PRODUCT[i].Description, 75);
 
             CONTAINER.appendChild(NEW_ITEM);
         }
@@ -188,6 +191,39 @@ function changePassword() {
             // Do something else, like throw an error...
             else throw "Wrong password"
         }).catch(error => console.log(error))
+}
+
+function showItem() {
+    let ARTICLE_NUMBER = window.location.hash[1]
+    const URL = "http://localhost:8080/restservices/product/" + ARTICLE_NUMBER;
+
+    let PRODUCT_TITLE_ELEMENT = document.getElementById("title")
+    let PRODUCT_IMAGE_ELEMENT = document.getElementById("image")
+    let PRODUCT_DESC_ELEMENT = document.getElementById("description")
+
+    fetch(URL).then(response => {
+        if (response.ok) {
+            return response.json()
+        }
+    }).then(data => {
+        PRODUCT_TITLE_ELEMENT.textContent = data.titel;
+        PRODUCT_IMAGE_ELEMENT.setAttribute("src", data.foto);
+        PRODUCT_DESC_ELEMENT.textContent = data.beschrijving;
+    })
+}
+
+function shortDescription(description, maxLength) {
+    const START_INDEX = 0
+    const SPACETAB = " ";
+
+    let shorterDescription = description.slice(START_INDEX, maxLength);
+
+    // if -1, no spaces found
+    const locationOfTab = shorterDescription.lastIndexOf(SPACETAB);
+
+    shorterDescription = shorterDescription.slice(START_INDEX, locationOfTab) + "...";
+
+    return shorterDescription;
 }
 
 /*
