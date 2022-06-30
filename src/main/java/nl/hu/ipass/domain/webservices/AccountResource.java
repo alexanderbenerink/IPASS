@@ -91,7 +91,7 @@ public class AccountResource {
     @Path("getuser")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed("user")
+    @RolesAllowed({"user", "admin"})
     public Response getUser(@Context SecurityContext sc) {
         Map<String, String> data = new HashMap<>();
         if (sc.getUserPrincipal() instanceof Gebruiker) {
@@ -106,7 +106,7 @@ public class AccountResource {
     @Path("editpassword")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed("user")
+    @RolesAllowed({"user", "admin"})
     public Response editPassword(@Context SecurityContext sc, ChangePasswordRequest request) {
         if (sc.getUserPrincipal() instanceof Gebruiker) {
             Gebruiker current = (Gebruiker) sc.getUserPrincipal();

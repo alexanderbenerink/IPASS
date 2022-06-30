@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Settings | Tommy Bishoppe</title>
+    <title>Wishlist | Tommy Bishoppe</title>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="showAllItems()">
 <section>
     <main class="hero is-fullheight">
         <!-- Navigation -->
@@ -76,46 +76,21 @@
                         <hr>
                         <div class="tabs is-centered">
                             <ul>
-                                <li id="wishlistLink"><a href="wishlist.html">Wishlist</a></li>
-                                <li id="addProductLink"><a href="addproduct.html">New product</a></li>
+                                <li class="is-active" id="wishlistLink"><a href="wishlist.html">Wishlist</a></li>
+                                <li id="addProductLink"><a>New product</a></li>
                                 <li id="statisticsLink"><a>Statistics</a></li>
-                                <li class="is-active"><a>Settings</a></li>
+                                <li><a href="account.html">Settings</a></li>
                             </ul>
                         </div>
                         <hr>
                     </div>
                 </div>
                 <div class="columns is-centered">
-                    <!-- Input fields for password change -->
-                    <div class="column is-6">
-                        <form id="modifyPasswordForm">
-                            <p class="subtitle has-text-centered">Change password</p>
-                            <div class="field">
-                                <label for="oldpassword">
-                                    <p>Enter your old password:</p>
-                                    <br>
-                                    <input id="oldpassword" type="password" class="input" placeholder="Old password" required>
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label for="newpassword">
-                                    <p>Enter a new password:</p>
-                                    <br>
-                                    <input id="newpassword" type="password" class="input" placeholder="12 characters, a-Z and atleast 1 special character" required>
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label for="confirmnewpassword">
-                                    <p>Confirm new password</p>
-                                    <br>
-                                    <input id="confirmnewpassword" type="password" class="input" placeholder="Confirm new password">
-                                </label>
-                            </div>
-                            <hr>
-                            <div class="field has-text-centered">
-                                <button type="submit" class="button">Submit</button>
-                            </div>
-                        </form>
+                    <!-- Items in wishlist here -->
+                    <div id="displayWishList" class="column is-6 has-text-centered">
+                        <p class="subtitle">Wishlist</p>
+                        <br>
+                        <p>This feature is coming soon.</p>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ public class AuthorizationResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed("user")
+    @RolesAllowed({"user", "admin"})
     public Response isAuthorized(@Context SecurityContext sc) {
         if (sc.getUserPrincipal() instanceof Gebruiker) {
             return Response.ok().build();
@@ -29,12 +29,13 @@ public class AuthorizationResource {
     @Path("getuser")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed("user")
+    @RolesAllowed({"user", "admin"})
     public Response getUser(@Context SecurityContext sc) {
         Map<String, String> data = new HashMap<>();
         if (sc.getUserPrincipal() instanceof Gebruiker) {
             Gebruiker current = (Gebruiker) sc.getUserPrincipal();
             data.put("username", current.getName());
+            data.put("role", current.getRole());
             return Response.ok(data).build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
