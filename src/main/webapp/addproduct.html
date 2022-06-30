@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add product | Tommy Bishoppe</title>
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+<section>
+    <main class="hero is-fullheight">
+        <!-- Navigation -->
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <div class="columns">
+                            <a href="home.html" class="navbar-item" title="Go to home">
+                                <div class="column">
+                                    <span class="title">Tommy Bishoppe</span>
+                                </div>
+                                <div class="column">
+                                    <span class="subtitle">Graphic Designer & Illustrator</span>
+                                </div>
+                            </a>
+                        </div>
+                        <!--                            <a class="navbar-item">-->
+                        <!--                                <img src="https://versions.bulma.io/0.7.0/images/bulma-type-white.png" alt="Logo">-->
+                        <!--                            </a>-->
+                        <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </span>
+                    </div>
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="products.html" class="navbar-item" title="Go to products">
+                                Products
+                            </a>
+                            <a id="loginbutton" href="login.html" class="navbar-item" title="Go to login">
+                                Login
+                            </a>
+                            <a id="registerbutton" href="register.html" class="navbar-item" title="Go to register">
+                                Register
+                            </a>
+                            <a id="accountbutton" href="account.html" class="navbar-item is-active" title="Go to my account">
+                                Account
+                            </a>
+                            <a id="logoutbutton" href="#" class="navbar-item" title="Log out">
+                                Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Body -->
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered"><hr>
+                    <div class="column is-6 has-text-centered">
+                        <h1 class="title">
+                            Account settings
+                        </h1>
+                        <p class="subtitle">Welcome, <span id="displayUsername"></span></p>
+                        <hr>
+                        <div class="tabs is-centered">
+                            <ul>
+                                <li id="wishlistLink"><a href="wishlist.html">Wishlist</a></li>
+                                <li id="addProductLink" class="is-active"><a>New product</a></li>
+                                <li id="statisticsLink"><a>Statistics</a></li>
+                                <li><a>Settings</a></li>
+                            </ul>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="columns is-centered">
+                    <!-- Input fields for adding a new product -->
+                    <div class="column is-6">
+                        <form id="addProductForm">
+                            <p class="subtitle has-text-centered">Add a new product</p>
+                            <div class="field">
+                                <label for="articlenumber">
+                                    <p>Product article number:</p>
+                                    <br>
+                                    <input id="articlenumber" type="number" class="input" placeholder="Enter a number" min="1" required>
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label for="title">
+                                    <p>Product title:</p>
+                                    <br>
+                                    <input id="title" type="text" class="input" placeholder="Enter a title" required>
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label for="description">
+                                    <p>Product description:</p>
+                                    <br>
+                                    <textarea id="description" class="input" placeholder="Enter a short description" required></textarea>
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label for="image">
+                                    <p>Upload product image:</p>
+                                    <br>
+                                    <input id="image" type="file">
+                                </label>
+                            </div>
+                            <hr>
+                            <div class="field has-text-centered">
+                                <button type="submit" class="button">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="hero-foot">
+            <nav class="tabs">
+                <div class="container">
+                    <ul>
+                        <li>© <script>document.write(new Date().getFullYear())</script></li>
+                        <li class="active-on-hover"><a href="http://tommybishoppe.com/" target="_blank">Portfolio</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </main>
+</section>
+<script type="application/javascript" src="js/functions.js"></script>
+<script type="module" src="js/login.js"></script>
+<script type="module" src="js/product.js"></script>
+</body>
+</html>

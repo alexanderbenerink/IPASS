@@ -19,12 +19,12 @@ public class MyServletContextListener implements ServletContextListener, HttpSes
         PersistenceManager.loadUsersFromAzure();
         System.out.println(Gebruiker.getAlleGebruikers());
 
-        Product product1 = new Product(1234, "Tattoo 1", "Een cool product", "https://i.imgur.com/DlFgABJ.jpg");
-        Product product2 = new Product(5678, "Tattoo 2", "Een nog cooler product", "https://i.imgur.com/DlFgABJ.jpg");
-        Product product3 = new Product(4123, "Tattoo 3", "Een ander product", "https://i.imgur.com/DlFgABJ.jpg");
-        Product product4 = new Product(4756, "Tattoo 4", "Een heel ander product", "https://i.imgur.com/DlFgABJ.jpg");
-        Product product5 = new Product(1029, "Tattoo 5", "Een goed verkocht product", "https://i.imgur.com/DlFgABJ.jpg");
-        Product product6 = new Product(3748, "Tattoo 6", "Een beter verkocht product", "https://i.imgur.com/DlFgABJ.jpg");
+        Product.addProduct(1234, "Tattoo 1", "https://i.imgur.com/DlFgABJ.jpg", "Een cool product");
+        Product.addProduct(5678, "Tattoo 2", "https://i.imgur.com/DlFgABJ.jpg","Een nog cooler product");
+        Product.addProduct(4123, "Tattoo 3", "https://i.imgur.com/DlFgABJ.jpg", "Een ander product");
+        Product.addProduct(4756, "Tattoo 4", "https://i.imgur.com/DlFgABJ.jpg", "Een heel ander product");
+        Product.addProduct(1029, "Tattoo 5", "https://i.imgur.com/DlFgABJ.jpg", "Een goed verkocht product");
+        Product.addProduct(3748, "Tattoo 6", "https://i.imgur.com/DlFgABJ.jpg", "Een beter verkocht product");
 
         // If the Thomas account exists, make it admin.
         Gebruiker opdrachtgever = Gebruiker.getUserByName("Thomas");

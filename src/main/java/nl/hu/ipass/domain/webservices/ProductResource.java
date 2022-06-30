@@ -43,10 +43,20 @@ public class ProductResource {
     @RolesAllowed("admin")
     public Response addProduct(@Context SecurityContext sc, ProductRequest request) {
         if (sc.getUserPrincipal() instanceof Gebruiker) {
+            Object articleNumber = request.article_number;
+
+//            if (!articleNumber.getClass().getSimpleName().equals("Integer")) {
+//                return Response.status(Response.Status.CONFLICT).build();
+//            }
+
             Product existingProduct = Product.getProductByName(request.article_number);
 
             if (existingProduct != null) {
                 return Response.status(Response.Status.CONFLICT).build();
+            }
+
+            if (request.image == null) {
+                request.image = "No preview available";
             }
 
             Product.addProduct(request.article_number, request.title, request.image, request.description);

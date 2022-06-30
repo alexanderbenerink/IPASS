@@ -12,11 +12,11 @@ public class Product {
     private String foto;
     private static List<Product> alleProducten = new ArrayList<>();
 
-    public Product(int an, String tt, String bs, String ft) {
+    public Product(int an, String tt, String ft, String bs) {
         this.artikelnummer = an;
         this.titel = tt;
-        this.beschrijving = bs;
         this.foto = ft;
+        this.beschrijving = bs;
     }
 
     public static void addProduct(int article_number, String title, String image, String description) {
