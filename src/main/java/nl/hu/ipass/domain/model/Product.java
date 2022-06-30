@@ -1,16 +1,18 @@
 package nl.hu.ipass.domain.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Product {
+public class Product implements Serializable {
     private int artikelnummer;
     private String titel;
     private String beschrijving;
     private String foto;
     private static List<Product> alleProducten = new ArrayList<>();
+    private String fotoUploadId;
 
     public Product(int an, String tt, String ft, String bs) {
         this.artikelnummer = an;
@@ -66,6 +68,8 @@ public class Product {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
+    public void setFotoUploadId(String fui) { this.fotoUploadId = fui; }
 
     public static List<Product> getAlleProducten() {
         return Collections.unmodifiableList(alleProducten);

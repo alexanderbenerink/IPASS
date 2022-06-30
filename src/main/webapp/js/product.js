@@ -30,7 +30,7 @@ function refresh() {
 if (PRODUCT_FORM) {
     PRODUCT_FORM.addEventListener("submit", e => {
         e.preventDefault();
-        service.addProduct(PRODUCT_FORM.articlenumber.value, PRODUCT_FORM.title.value, PRODUCT_FORM.image.value, PRODUCT_FORM.description.value).then(() => {
+        service.addProduct(PRODUCT_FORM.articlenumber.value, PRODUCT_FORM.title.value, PRODUCT_FORM.image.files[0], PRODUCT_FORM.description.value).then(() => {
             console.log("Refreshed.")
         });
     })

@@ -1,17 +1,25 @@
 export default class ProductService {
     //TODO: Functies...
-    addProduct(number, title, image, description) {
+    async addProduct(number, title, image, description) {
+        const toBase64 = image => new Promise((resolve, reject) => {
+            if (image === undefined) resolve("");
+
+            const reader = new FileReader();
+            reader.readAsDataURL(image);
+            reader.addEventListener("load", () => resolve(reader.result));
+            reader.addEventListener("error", error => reject(error));
+        });
+
         const URL = 'http://localhost:8080/restservices/product/add'
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
+
 
         let jsonRequestBody = {
             "article_number": number,
             "title": title,
-            "image": image,
+            "image": await toBase64(image),
             "description": description
         };
-
-        console.log(jsonRequestBody);
 
         let fetchOptions = {
             method: "POST",

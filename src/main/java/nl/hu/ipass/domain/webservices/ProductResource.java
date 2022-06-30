@@ -2,6 +2,8 @@ package nl.hu.ipass.domain.webservices;
 
 import nl.hu.ipass.domain.model.Gebruiker;
 import nl.hu.ipass.domain.model.Product;
+import nl.hu.ipass.domain.persistence.EncodedBase64;
+import nl.hu.ipass.domain.persistence.PersistenceManager;
 import nl.hu.ipass.domain.webservices.dto.ProductRequest;
 
 import javax.annotation.security.RolesAllowed;
@@ -55,11 +57,15 @@ public class ProductResource {
                 return Response.status(Response.Status.CONFLICT).build();
             }
 
-            if (request.image == null) {
-                request.image = "No preview available";
+            Product.addProduct(request.article_number, request.title, request.image, request.description);
+            Product added = Product.getProductByName(request.article_number);
+
+            if (request.image != null || !request.image.isEmpty()) {
+                EncodedBase64 base64 = new EncodedBase64(added.getFoto());
+                String uploadId = PersistenceManager.saveUploadToAzure(base64);
+                added.setFotoUploadId(uploadId);
             }
 
-            Product.addProduct(request.article_number, request.title, request.image, request.description);
             return Response.ok().build();
         }
 
