@@ -3,12 +3,15 @@ package nl.hu.ipass.domain.listeners;
 import nl.hu.ipass.domain.model.Gebruiker;
 import nl.hu.ipass.domain.model.Product;
 import nl.hu.ipass.domain.persistence.PersistenceManager;
+import reactor.core.scheduler.Schedulers;
+import reactor.netty.http.HttpResources;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionListener;
+import java.time.Duration;
 
 @WebListener
 public class MyServletContextListener implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
@@ -38,5 +41,8 @@ public class MyServletContextListener implements ServletContextListener, HttpSes
         /* code to dispose of loops and connections and/or to write to azure etc */
         PersistenceManager.saveUsersToAzure();
         PersistenceManager.saveProductsToAzure();
+
+        Schedulers.shutdownNow();
+        HttpResources.disposeLoopsAndConnectionsLater(Duration.ZERO, Duration.ZERO).block();
     }
 }

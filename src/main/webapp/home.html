@@ -90,18 +90,26 @@
                     </div>
                     <div id="itemContainer" class="columns is-multiline is-centered">
                         <template id="itemTile">
-                            <div class="column is-3">
-                                <a id="goToProductPage" title="Go to product page">
+                            <div class="column is-4">
                                     <div class="tile is-ancestor">
                                         <div id="tileContainer" class="tile is-parent">
                                             <article class="tile is-child box">
-                                                <img id="itemImg" src="#" alt="Picture of tattoo" width="250">
-                                                <h2 id="itemTitle" class="title">Title</h2>
-                                                <p id="itemDescription" class="subtitle">Description</p>
+                                                <div class="columns is-12">
+                                                    <div class="column is-10">
+                                                        <a id="goToProductPage" class="inactive-on-hover" title="Go to product page">
+                                                            <img id="itemImg" src="#" alt="Picture of tattoo" width="250">
+                                                            <h2 id="itemTitle" class="title">Title</h2>
+                                                            <p id="itemDescription" class="subtitle">Description</p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="column is-2">
+<!--                                                        <button id="removeProductButton" class="button remove-product">x</button>-->
+<!--                                                        <button id="addToWishlistButton" class="button wishlist-button">♡</button>-->
+                                                    </div>
+                                                </div>
                                             </article>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                         </template>
                     </div>

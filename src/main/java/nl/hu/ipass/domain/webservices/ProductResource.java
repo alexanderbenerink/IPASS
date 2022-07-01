@@ -80,4 +80,18 @@ public class ProductResource {
         Product current = Product.getProductByName(productId);
         return Response.ok(current).build();
     }
+
+    @DELETE
+    @Path("remove/{productId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin")
+    public Response removeProduct(@Context SecurityContext sc, @PathParam("productId") int productId) {
+        if (sc.getUserPrincipal() instanceof Gebruiker) {
+            Product current = Product.getProductByName(productId);
+            Product.removeProduct(current);
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
 }

@@ -58,6 +58,7 @@ async function showMostPopularItems() {
                 NEW_ITEM.querySelector("#itemTitle").textContent = PRODUCT[i].Title;
                 NEW_ITEM.querySelector("img").src = PRODUCT[i].Image;
                 NEW_ITEM.querySelector("#itemDescription").textContent = shortDescription(PRODUCT[i].Description, 75);
+                // NEW_ITEM.querySelector("#removeProductButton").textContent = "x";
 
                 CONTAINER.appendChild(NEW_ITEM);
                 count++;
@@ -79,6 +80,7 @@ async function showAllItems() {
             NEW_ITEM.querySelector("#itemTitle").textContent = PRODUCT[i].Title;
             NEW_ITEM.querySelector("img").src = PRODUCT[i].Image;
             NEW_ITEM.querySelector("#itemDescription").textContent = shortDescription(PRODUCT[i].Description, 75);
+            // NEW_ITEM.querySelector("removeProductButton").textContent = "x";
 
             CONTAINER.appendChild(NEW_ITEM);
         }

@@ -79,6 +79,12 @@ public class Product implements Serializable {
         return alleProducten.stream().filter(e -> e.getTitel().equals(name)).findFirst().orElse(null);
     }
 
+    public static void removeProduct(Product product) {
+        if (alleProducten.contains(product)) {
+            alleProducten.remove(product);
+        }
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(titel);

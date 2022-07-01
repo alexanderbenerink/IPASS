@@ -36,4 +36,27 @@ export default class ProductService {
             } else throw "Something went wrong with adding the product"
         }).catch(error => console.log(error));
     }
+
+    removeProduct(number) {
+        const URL = "http://localhost:8080/restservices/product/remove/" + number;
+        const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
+
+        let fetchOptions = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + LOCAL_TOKEN
+            }
+        }
+
+        fetch(URL, fetchOptions).then(response => {
+            if (response.ok) {
+                // Log response
+                console.log(response.status)
+                console.log("Succesfully removed the product")
+                // then refresh
+                return location.replace("products.html")
+            } else throw "Something wrong happened."
+        }).catch(error => console.log(error))
+    }
 }

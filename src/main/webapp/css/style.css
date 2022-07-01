@@ -11,6 +11,19 @@ body {
     color: blue;
 }
 
+.remove-product {
+    background-color: lightcoral;
+    color: black;
+    /*position: absolute;*/
+    /*margin-left: 20vh;*/
+    /*!*margin-top: -120px;*!*/
+    /*margin-top: -12vh;*/
+}
+
+.inactive-on-hover {
+    color: inherit;
+}
+
 /*Rules for tablets/phones (Screens at 1024px or lower)*/
 @media only screen and (max-width: 1024px) {
     /*.codeword {*/

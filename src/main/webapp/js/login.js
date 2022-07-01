@@ -19,6 +19,10 @@ const LOGOUT_BUTTON = document.links.logoutbutton;
 const WISHLIST_LINK = document.getElementById("wishlistLink");
 const ADMIN_ELEMENTS = [document.getElementById("addProductLink"), document.getElementById("statisticsLink")];
 const DISPLAY_USERNAME = document.getElementById("displayUsername");
+// let REMOVE_PRODUCT_BUTTON = document.getElementsByClassName("remove-product");
+// let ADD_TO_WISHLIST_BUTTON = document.getElementsByClassName("wishlist-button");
+let PRODUCT_REMOVE = document.getElementById("removeProductButton");
+let WISHLIST_ADD = document.getElementById("addToWishlistButton");
 let USERNAME = "";
 let IS_ADMIN = "";
 
@@ -72,8 +76,12 @@ function refresh() {
 
         if (IS_ADMIN === "admin") {
             if (WISHLIST_LINK) { WISHLIST_LINK.style = "display:none" }
+            // if (ADD_TO_WISHLIST_BUTTON) { ADD_TO_WISHLIST_BUTTON.style = "display:none" }
+            if (WISHLIST_ADD) { WISHLIST_ADD.style = "display:none" }
         } else if (IS_ADMIN === "user") {
-            if (ADMIN_ELEMENTS) { ADMIN_ELEMENTS.forEach(item => item.style= "display:none")}
+            // if (REMOVE_PRODUCT_BUTTON) { REMOVE_PRODUCT_BUTTON.style = "display:none" }
+            if (PRODUCT_REMOVE) { PRODUCT_REMOVE.style = "display:none"; }
+            if (ADMIN_ELEMENTS) { ADMIN_ELEMENTS.forEach(item => item.style= "display:none") }
         }
 
     } else {
@@ -83,6 +91,16 @@ function refresh() {
             LOGIN_BUTTON.style = "display:inherit";
             REGISTER_BUTTON.style = "display:inherit";
         }
+        if (PRODUCT_REMOVE && WISHLIST_ADD) {
+            PRODUCT_REMOVE.style = "display:none";
+            WISHLIST_ADD.setAttribute("disabled", "");
+            WISHLIST_ADD.setAttribute("title", "You must log in first before you can do this!");
+        }
+        // console.log(ADD_TO_WISHLIST_BUTTON.length)
+        // if (ADD_TO_WISHLIST_BUTTON && REMOVE_PRODUCT_BUTTON) {
+        //     ADD_TO_WISHLIST_BUTTON.forEach(item => item.style = "display:none");
+        //     REMOVE_PRODUCT_BUTTON.forEach(item => item.style = "display:none");
+        // }
     }
 }
 
@@ -108,6 +126,12 @@ if (LOGOUT_BUTTON) {
         });
     });
 }
+
+// if (REMOVE_PRODUCT_BUTTON) {
+//     REMOVE_PRODUCT_BUTTON.addEventListener('click', e => {
+//         e.preventDefault();
+//     });
+// }
 
 refresh();
 
