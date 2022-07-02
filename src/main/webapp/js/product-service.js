@@ -33,6 +33,7 @@ export default class ProductService {
         return fetch(URL, fetchOptions).then(response => {
             if (response.ok) {
                 console.log("Product has been succesfully added!");
+                return location.replace("product.html#" + number);
             } else throw "Something went wrong with adding the product"
         }).catch(error => console.log(error));
     }
