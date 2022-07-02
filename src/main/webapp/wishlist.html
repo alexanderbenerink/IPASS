@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
-<body onload="showAllItems()">
+<body>
 <section>
     <main class="hero is-fullheight">
         <!-- Navigation -->
@@ -85,12 +85,29 @@
                         <hr>
                     </div>
                 </div>
-                <div class="columns is-centered">
-                    <!-- Items in wishlist here -->
-                    <div id="displayWishList" class="column is-6 has-text-centered">
-                        <p class="subtitle">Wishlist</p>
-                        <br>
-                        <p>This feature is coming soon.</p>
+                <!-- Items in wishlist here -->
+                <div id="displayWishList" class="has-text-centered">
+                    <p id="no-wishlist" class="subtitle"></p>
+                    <div id="itemContainer" class="columns is-multiline is-centered">
+                        <template id="itemTile">
+                            <div class="column is-2">
+                                <div class="tile is-ancestor">
+                                    <div id="tileContainer" class="tile is-parent">
+                                        <article class="tile is-child box">
+                                            <div class="columns">
+                                                <div class="column">
+                                                    <a id="goToProductPage" class="inactive-on-hover" title="Go to product page">
+                                                        <img id="itemImg" src="#" alt="Picture of tattoo" width="250">
+                                                        <h2 id="itemTitle" class="title">Title</h2>
+                                                        <p id="itemDescription" class="subtitle">Description</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -110,5 +127,6 @@
 </section>
 <script type="application/javascript" src="js/functions.js"></script>
 <script type="module" src="js/login.js"></script>
+<script type="module" src="js/product.js"></script>
 </body>
 </html>

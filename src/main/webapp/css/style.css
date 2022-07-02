@@ -24,6 +24,14 @@ body {
     color: inherit;
 }
 
+.wishlistButtonText {
+    font-size: 4vh;
+}
+
+.wishlisted {
+    background-color: #f4fbf4;
+}
+
 /*Rules for tablets/phones (Screens at 1024px or lower)*/
 @media only screen and (max-width: 1024px) {
     /*.codeword {*/

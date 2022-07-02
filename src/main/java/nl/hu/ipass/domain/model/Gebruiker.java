@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Gebruiker implements Principal, Serializable {
     private String gebruikersnaam, email, wachtwoord, rol;
     private static List<Gebruiker> alleGebruikers = new ArrayList<>();
+    private static List<Product> wishlist = new ArrayList<>();
 
     public Gebruiker(String gb, String em, String ww) {
         this.gebruikersnaam = gb;
@@ -80,6 +81,16 @@ public class Gebruiker implements Principal, Serializable {
         if (!alleGebruikers.contains(toAdd)) {
             alleGebruikers.add(toAdd);
         }
+    }
+
+    public static void addProductToWishlist(Product product) {
+        if (!wishlist.contains(product)) {
+            wishlist.add(product);
+        }
+    }
+
+    public static List<Product> getWishlist() {
+        return Collections.unmodifiableList(wishlist);
     }
 
     @Override

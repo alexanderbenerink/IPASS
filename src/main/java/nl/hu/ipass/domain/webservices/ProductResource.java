@@ -2,6 +2,7 @@ package nl.hu.ipass.domain.webservices;
 
 import nl.hu.ipass.domain.model.Gebruiker;
 import nl.hu.ipass.domain.model.Product;
+import nl.hu.ipass.domain.model.Verlanglijst;
 import nl.hu.ipass.domain.persistence.EncodedBase64;
 import nl.hu.ipass.domain.persistence.PersistenceManager;
 import nl.hu.ipass.domain.webservices.dto.ProductRequest;
@@ -16,9 +17,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.AbstractMap.SimpleEntry;
 
 @Path("product")
 public class ProductResource {
+
+    public static final String ERROR = "error";
+    public static final String SUCCESS = "success";
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllProducts() {
@@ -91,6 +97,65 @@ public class ProductResource {
             Product current = Product.getProductByName(productId);
             Product.removeProduct(current);
             return Response.ok().build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @POST
+    @Path("addtowishlist")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed("user")
+    public Response addProductToWishlist(@Context SecurityContext sc, ProductRequest request) {
+        if (sc.getUserPrincipal() instanceof Gebruiker) {
+            if (Product.getProductByName(request.article_number) != null) {
+                Product product = Product.getProductByName(request.article_number);
+                Verlanglijst wishlist = Verlanglijst.getAllWishLists().stream().filter(e->e.getOwner().equals(sc.getUserPrincipal())).findFirst().orElse(null);
+                if (wishlist == null) {
+                    return Response.status(Response.Status.NOT_FOUND).build();
+                } else if (wishlist.getProductList().contains(product)) {
+                    wishlist.removeProduct(product);
+                    return Response.ok(new SimpleEntry<>(SUCCESS, "Product has been removed from your wishlist!")).build();
+                }
+                wishlist.addProductToWishlist(product);
+                return Response.ok(new SimpleEntry<>(SUCCESS, "Product has been added to your wishlist!")).build();
+            }
+            return Response.status(Response.Status.CONFLICT).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @POST
+    @Path("wishlist")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed("user")
+    public Response getWishlist(@Context SecurityContext sc, ProductRequest request) {
+        if (sc.getUserPrincipal() instanceof Gebruiker) {
+            System.out.println(Verlanglijst.getAllWishLists());
+            Gebruiker currentUser = Gebruiker.getUserByName(sc.getUserPrincipal().getName());
+            Verlanglijst wishlist = Verlanglijst.getAllWishLists().stream().filter(e->e.getOwner().equals(currentUser)).findFirst().orElse(null);
+            if (wishlist != null) {
+                return Response.ok(wishlist.getProductList()).build();
+            }
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @POST
+    @Path("wishlist/{productId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed("user")
+    public Response getProductFromWishlist(@Context SecurityContext sc, @PathParam("productId") int productId) {
+        if (sc.getUserPrincipal() instanceof Gebruiker) {
+            Gebruiker currentUser = Gebruiker.getUserByName(sc.getUserPrincipal().getName());
+            Verlanglijst wishlist = Verlanglijst.getAllWishLists().stream().filter(e->e.getOwner().equals(currentUser)).findFirst().orElse(null);
+            if (wishlist != null && wishlist.getProductById(productId) != null) {
+                return Response.ok(wishlist.getProductById(productId)).entity(new SimpleEntry<>(SUCCESS, "This product is in your wishlist")).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).entity(new SimpleEntry<>(ERROR, "Product not in wishlist")).build();
+            }
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }

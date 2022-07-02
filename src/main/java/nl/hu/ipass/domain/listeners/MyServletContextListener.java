@@ -2,6 +2,7 @@ package nl.hu.ipass.domain.listeners;
 
 import nl.hu.ipass.domain.model.Gebruiker;
 import nl.hu.ipass.domain.model.Product;
+import nl.hu.ipass.domain.model.Verlanglijst;
 import nl.hu.ipass.domain.persistence.PersistenceManager;
 import reactor.core.scheduler.Schedulers;
 import reactor.netty.http.HttpResources;
@@ -30,6 +31,11 @@ public class MyServletContextListener implements ServletContextListener, HttpSes
 //        Product.addProduct(4756, "Tattoo 4", "https://i.imgur.com/DlFgABJ.jpg", "Een heel ander product");
 //        Product.addProduct(1029, "Tattoo 5", "https://i.imgur.com/DlFgABJ.jpg", "Een goed verkocht product");
 //        Product.addProduct(3748, "Tattoo 6", "https://i.imgur.com/DlFgABJ.jpg", "Een beter verkocht product");
+
+        // Create a wishlist for every user
+        for (Gebruiker user : Gebruiker.getAlleGebruikers()) {
+            new Verlanglijst("wishlist", user);
+        }
 
         // If the Thomas account exists, make it admin.
         Gebruiker opdrachtgever = Gebruiker.getUserByName("Thomas");

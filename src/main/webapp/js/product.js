@@ -11,7 +11,10 @@ import ProductService from "./product-service.js";
 let service = new ProductService();
 const PRODUCT_FORM = document.forms.addProductForm;
 const PRODUCT_REMOVE = document.getElementById("removeProductButton");
-let ARTICLE_NUMBER = window.location.hash[1]
+let ARTICLE_NUMBER = window.location.hash[1];
+const ADD_TO_WISHLIST_BUTTON = document.getElementById("addToWishlistButton");
+const WISHLIST_BUTTON_TEXT = document.getElementById("wishlistButtonText");
+const WISHLIST_DIV = document.getElementById("displayWishList");
 // const PRODUCT_NR = document.getElementById("productArticleNumber").value;
 // const PRODUCT_TITLE = document.getElementById("productTitle").value;
 // const PRODUCT_IMG = document.getElementById("productImage").value;
@@ -45,6 +48,40 @@ if (PRODUCT_REMOVE && ARTICLE_NUMBER) {
             service.removeProduct(ARTICLE_NUMBER)
         }
     })
+}
+
+if (ADD_TO_WISHLIST_BUTTON && ARTICLE_NUMBER) {
+    service.getProductFromWishlist(ARTICLE_NUMBER).then(response => {
+        if (response) {
+            WISHLIST_BUTTON_TEXT.textContent = "♥"
+            ADD_TO_WISHLIST_BUTTON.classList.add("wishlisted")
+            ADD_TO_WISHLIST_BUTTON.title = "Remove from wishlist"
+        } else {
+            WISHLIST_BUTTON_TEXT.textContent = "♡"
+            ADD_TO_WISHLIST_BUTTON.classList.remove("wishlisted")
+            ADD_TO_WISHLIST_BUTTON.title = "Add to wishlist"
+        }
+    });
+
+    ADD_TO_WISHLIST_BUTTON.addEventListener("click", e => {
+        e.preventDefault();
+        service.addProductToWishlist(ARTICLE_NUMBER).then(response => {
+            if (response) {
+                WISHLIST_BUTTON_TEXT.textContent = "♥"
+                ADD_TO_WISHLIST_BUTTON.classList.add("wishlisted")
+                ADD_TO_WISHLIST_BUTTON.title = "Remove from wishlist"
+            } else {
+                WISHLIST_BUTTON_TEXT.textContent = "♡"
+                ADD_TO_WISHLIST_BUTTON.classList.remove("wishlisted")
+                ADD_TO_WISHLIST_BUTTON.title = "Add to wishlist"
+            }
+        })
+    })
+}
+
+if (WISHLIST_DIV) {
+    console.log("hi")
+    service.getWishlist()
 }
 
 refresh();
