@@ -1,6 +1,7 @@
 package nl.hu.ipass.domain.webservices;
 
 import nl.hu.ipass.domain.model.Gebruiker;
+import nl.hu.ipass.domain.model.Verlanglijst;
 import nl.hu.ipass.domain.webservices.dto.ChangePasswordRequest;
 import nl.hu.ipass.domain.webservices.dto.RegistrationRequest;
 
@@ -55,6 +56,7 @@ public class AccountResource {
         }
 
         Gebruiker.addUser(registrationRequest.username, registrationRequest.email, registrationRequest.password);
+        Verlanglijst vl = new Verlanglijst("wishlist", current);
         System.out.println(Gebruiker.getAlleGebruikers());
         return Response.ok().build();
     }

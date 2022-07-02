@@ -5,6 +5,7 @@ import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobContainerClientBuilder;
 import nl.hu.ipass.domain.model.Gebruiker;
 import nl.hu.ipass.domain.model.Product;
+import nl.hu.ipass.domain.model.Verlanglijst;
 
 import java.io.*;
 import java.util.Base64;
@@ -187,5 +188,65 @@ public class PersistenceManager {
         }
 
         return null;
+    }
+
+    // Save to and load wishlist(s) from Azure
+
+    public static void loadWishlistsFromAzure() {
+        // Maak verbinding
+        // Ga bytes schuiven
+        // Plaats wishlists in Verlanglijst klasse
+        try {
+            if (blobContainerClient.exists()) {
+                BlobClient blob = blobContainerClient.getBlobClient("wishlists");
+
+                if (blob.exists()) {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    blob.download(baos);
+
+                    ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                    ObjectInputStream ois = new ObjectInputStream(bais);
+
+                    List<Verlanglijst> allWishLists = (List<Verlanglijst>) ois.readObject();
+
+                    for (Verlanglijst wishlist : allWishLists) {
+                        Verlanglijst vl = new Verlanglijst("wishlist", wishlist.getOwner());
+
+                        for (Product product : wishlist.getProductList()) {
+                            vl.addProductToWishlist(product);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveWishlistsToAzure() {
+        // Haal de wishlists op
+        // Connect
+        // Stream
+        try {
+            if (!blobContainerClient.exists()) {
+                blobContainerClient.create();
+            }
+
+            BlobClient blob = blobContainerClient.getBlobClient("wishlists");
+            List<Verlanglijst> wishlistsToSave = Verlanglijst.getAllWishLists();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(wishlistsToSave);
+
+            byte[] bytez = baos.toByteArray();
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(bytez);
+            blob.upload(bais, bytez.length, true);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
     }
 }

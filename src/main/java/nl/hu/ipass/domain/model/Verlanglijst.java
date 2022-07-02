@@ -1,10 +1,11 @@
 package nl.hu.ipass.domain.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Verlanglijst {
+public class Verlanglijst implements Serializable {
     private String name;
     private Gebruiker owner;
     private static List<Verlanglijst> allWishLists = new ArrayList<>();
@@ -13,8 +14,8 @@ public class Verlanglijst {
     public Verlanglijst(String name, Gebruiker owner) {
         this.name = name;
         this.owner = owner;
+        this.wishlist = new ArrayList<>();
         allWishLists.add(this);
-        wishlist = new ArrayList<>();
     }
 
     public Product getProductById(int articlenumber) {
