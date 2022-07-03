@@ -75,29 +75,29 @@
                   Search catalog
                 </h1>
                 <hr>
-                <input class="input">
+                <input id="searchbox" class="input" type="search" placeholder="Enter a keyword">
               </label>
             </div>
           </div>
           <hr>
           <div id="itemContainer" class="columns is-multiline is-centered">
             <template id="itemTile">
-              <div class="column is-4">
+              <div class="column is-4 searchable">
                 <div class="tile is-ancestor">
                   <div id="tileContainer" class="tile is-parent">
                     <article class="tile is-child box">
                       <div class="columns is-12">
-                        <div class="column is-10">
+                        <div class="column">
                           <a id="goToProductPage" class="inactive-on-hover" title="Go to product page">
                             <img id="itemImg" src="#" alt="Picture of tattoo" width="250">
                             <h2 id="itemTitle" class="title">Title</h2>
                             <p id="itemDescription" class="subtitle">Description</p>
                           </a>
                         </div>
-                        <div class="column is-2">
+<!--                        <div class="column is-2">-->
 <!--                          <button name="removeProductButton" class="button remove-product">x</button>-->
 <!--                          <button name="addToWishlistButton" class="button wishlist-button">♡</button>-->
-                        </div>
+<!--                        </div>-->
                       </div>
                     </article>
                   </div>
