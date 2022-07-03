@@ -56,7 +56,6 @@ public class AccountResource {
         }
 
         Gebruiker.addUser(registrationRequest.username, registrationRequest.email, registrationRequest.password);
-        Verlanglijst vl = new Verlanglijst("wishlist", current);
         System.out.println(Gebruiker.getAlleGebruikers());
         return Response.ok().build();
     }

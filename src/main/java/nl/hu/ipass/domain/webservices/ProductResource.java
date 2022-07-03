@@ -2,6 +2,7 @@ package nl.hu.ipass.domain.webservices;
 
 import nl.hu.ipass.domain.model.Gebruiker;
 import nl.hu.ipass.domain.model.Product;
+import nl.hu.ipass.domain.model.Reservering;
 import nl.hu.ipass.domain.model.Verlanglijst;
 import nl.hu.ipass.domain.persistence.EncodedBase64;
 import nl.hu.ipass.domain.persistence.PersistenceManager;
@@ -13,10 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
 
 @Path("product")
@@ -109,10 +107,13 @@ public class ProductResource {
     public Response addProductToWishlist(@Context SecurityContext sc, ProductRequest request) {
         if (sc.getUserPrincipal() instanceof Gebruiker) {
             if (Product.getProductByName(request.article_number) != null) {
+                Gebruiker current = Gebruiker.getUserByName(sc.getUserPrincipal().getName());
                 Product product = Product.getProductByName(request.article_number);
                 Verlanglijst wishlist = Verlanglijst.getAllWishLists().stream().filter(e->e.getOwner().equals(sc.getUserPrincipal())).findFirst().orElse(null);
                 if (wishlist == null) {
-                    return Response.status(Response.Status.NOT_FOUND).build();
+                    Verlanglijst vl = new Verlanglijst("wishlist", current);
+                    vl.addProductToWishlist(product);
+                    return Response.ok(new AbstractMap.SimpleEntry<>(SUCCESS, "Product has been added to your wishlist!")).build();
                 } else if (wishlist.getProductList().contains(product)) {
                     wishlist.removeProduct(product);
                     return Response.ok(new SimpleEntry<>(SUCCESS, "Product has been removed from your wishlist!")).build();
