@@ -10,7 +10,7 @@ export default class ProductService {
             reader.addEventListener("error", error => reject(error));
         });
 
-        const URL = 'http://localhost:8080/restservices/product/add'
+        const URL = 'restservices/product/add'
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
 
@@ -39,7 +39,7 @@ export default class ProductService {
     }
 
     addProductToWishlist(number) {
-        const URL = 'http://localhost:8080/restservices/product/addtowishlist';
+        const URL = 'restservices/product/addtowishlist';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
         let jsonRequestBody = {
@@ -66,7 +66,7 @@ export default class ProductService {
     }
 
     getWishlist() {
-        const URL = 'http://localhost:8080/restservices/product/wishlist';
+        const URL = 'restservices/product/wishlist';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
         let fetchOptions = {
@@ -108,7 +108,7 @@ export default class ProductService {
     }
 
     removeProduct(number) {
-        const URL = "http://localhost:8080/restservices/product/remove/" + number;
+        const URL = "restservices/product/remove/" + number;
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
         let fetchOptions = {
@@ -131,7 +131,7 @@ export default class ProductService {
     }
 
     getProductFromWishlist(number) {
-        const URL = "http://localhost:8080/restservices/product/wishlist/" + number;
+        const URL = "restservices/product/wishlist/" + number;
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
         let fetchOptions = {
@@ -152,7 +152,7 @@ export default class ProductService {
     }
 
     bookProduct(number) {
-        const URL = 'http://localhost:8080/restservices/book/bookproduct';
+        const URL = 'restservices/book/bookproduct';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
         // const TODAY = new Date();
@@ -184,7 +184,7 @@ export default class ProductService {
     }
 
     getBookingFromBookings(number) {
-        const URL = "http://localhost:8080/restservices/book/" + number;
+        const URL = "restservices/book/" + number;
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
         let fetchOptions = {
@@ -205,7 +205,7 @@ export default class ProductService {
     }
 
     getBookingsFromUser() {
-        const URL = 'http://localhost:8080/restservices/book/user';
+        const URL = 'restservices/book/user';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
         let fetchOptions = {
@@ -252,7 +252,7 @@ export default class ProductService {
     }
 
     getAllBookings() {
-        const URL = 'http://localhost:8080/restservices/book/allbookings';
+        const URL = 'restservices/book/allbookings';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
         let fetchOptions = {

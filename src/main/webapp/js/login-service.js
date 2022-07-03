@@ -24,7 +24,7 @@ export default class LoginService {
             headers: {'Content-Type': 'application/json'}
         }
 
-        const URL = "http://localhost:8080/restservices/authentication";
+        const URL = "restservices/authentication";
         return fetch(URL, fetchOptions)
             .then(response => {
                 if (response.ok) {
@@ -47,7 +47,7 @@ export default class LoginService {
         //Dus het is handig om te checken met een -echte fetch- of je login-token wel echt bruikbaar is.
         // return Promise.resolve(null);
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
-        const URL = "http://localhost:8080/restservices/authorization/getuser";
+        const URL = "restservices/authorization/getuser";
 
         let fetchOptions = {
             method: "GET",
