@@ -170,7 +170,7 @@ function changePassword() {
     const OLD_PASSWORD = document.getElementById("oldpassword")
     const NEW_PASSWORD = document.getElementById("newpassword")
     const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT")
-    const URL = "http://localhost:8080/restservices/account/editpassword";
+    const URL = "restservices/account/editpassword";
 
     let jsonRequestBody = {
         "oldpassword": OLD_PASSWORD.value,
@@ -200,7 +200,7 @@ function changePassword() {
 
 function showItem() {
     let ARTICLE_NUMBER = window.location.hash[1]
-    const URL = "http://localhost:8080/restservices/product/" + ARTICLE_NUMBER;
+    const URL = "restservices/product/" + ARTICLE_NUMBER;
 
     let PRODUCT_TITLE_ELEMENT = document.getElementById("title")
     let PRODUCT_IMAGE_ELEMENT = document.getElementById("image")
