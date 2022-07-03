@@ -16,6 +16,7 @@ const ADD_TO_WISHLIST_BUTTON = document.getElementById("addToWishlistButton");
 const WISHLIST_BUTTON_TEXT = document.getElementById("wishlistButtonText");
 const WISHLIST_DIV = document.getElementById("displayWishList");
 const DISPLAY_USER_RESERVATIONS = document.getElementById("displayUserReservations");
+const DISPLAY_ALL_RESERVATIONS = document.getElementById("displayAllUserReservations");
 const BOOK_PRODUCT_BUTTON = document.getElementById("bookProduct");
 const BOOK_PRODUCT_TEXT = document.getElementById("bookProductText");
 // const PRODUCT_NR = document.getElementById("productArticleNumber").value;
@@ -113,6 +114,10 @@ if (BOOK_PRODUCT_BUTTON && BOOK_PRODUCT_TEXT && ARTICLE_NUMBER) {
 
 if (DISPLAY_USER_RESERVATIONS) {
     service.getBookingsFromUser();
+}
+
+if (DISPLAY_ALL_RESERVATIONS) {
+    service.getAllBookings();
 }
 
 refresh();

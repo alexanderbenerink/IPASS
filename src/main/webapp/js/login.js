@@ -20,6 +20,8 @@ const WISHLIST_LINK = document.getElementById("wishlistLink");
 const ADMIN_ELEMENTS = [document.getElementById("addProductLink"), document.getElementById("statisticsLink")];
 const DISPLAY_USERNAME = document.getElementById("displayUsername");
 const RESERVATION_LINK = document.getElementById("reservationsLink");
+const USER_RESERVATIONS_DIV = document.getElementById("displayUserReservations");
+const ALL_RESERVATIONS_DIV = document.getElementById("displayAllUserReservations");
 // let REMOVE_PRODUCT_BUTTON = document.getElementsByClassName("remove-product");
 // let ADD_TO_WISHLIST_BUTTON = document.getElementsByClassName("wishlist-button");
 let PRODUCT_REMOVE = document.getElementById("removeProductButton");
@@ -79,16 +81,17 @@ function refresh() {
         if (IS_ADMIN === "admin") {
             if (WISHLIST_LINK && RESERVATION_LINK) {
                 WISHLIST_LINK.style = "display:none"
-                RESERVATION_LINK.style = "display:none"
+                // RESERVATION_LINK.style = "display:none"
             }
             // if (ADD_TO_WISHLIST_BUTTON) { ADD_TO_WISHLIST_BUTTON.style = "display:none" }
             if (WISHLIST_ADD) { WISHLIST_ADD.style = "display:none" }
             if (BOOK_PRODUCT) { BOOK_PRODUCT.style = "display:none" }
-
+            if (USER_RESERVATIONS_DIV) { USER_RESERVATIONS_DIV.style = "display:none" }
         } else if (IS_ADMIN === "user") {
             // if (REMOVE_PRODUCT_BUTTON) { REMOVE_PRODUCT_BUTTON.style = "display:none" }
             if (PRODUCT_REMOVE) { PRODUCT_REMOVE.style = "display:none"; }
             if (ADMIN_ELEMENTS) { ADMIN_ELEMENTS.forEach(item => item.style= "display:none") }
+            if (ALL_RESERVATIONS_DIV) {ALL_RESERVATIONS_DIV.style = "display:none"}
         }
 
     } else {

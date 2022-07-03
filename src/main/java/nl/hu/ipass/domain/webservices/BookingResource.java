@@ -20,7 +20,7 @@ public class BookingResource {
     public static final String ERROR = "error";
     public static final String SUCCESS = "success";
 
-    @GET
+    @POST
     @Path("allbookings")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

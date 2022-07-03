@@ -250,4 +250,60 @@ export default class ProductService {
             console.log(error)
         })
     }
+
+    getAllBookings() {
+        const URL = 'http://localhost:8080/restservices/book/allbookings';
+        const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
+
+        let fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + LOCAL_TOKEN
+            }
+        }
+
+        return fetch(URL, fetchOptions).then(response => {
+            if (response.ok) {
+                console.log("Succes fetching all bookings...")
+                return response.json();
+            } else throw response.status + " Something wrong happened."
+        }).then(data => {
+            const START_INDEX = 0;
+            const PRODUCT = data;
+            const CONTAINER = document.getElementById("itemContainer1");
+            const TEMPLATE = document.getElementById("item1");
+            let EMPTY_LISTS = 0;
+
+            if (PRODUCT.length !== 0) {
+                for (let i = START_INDEX; i < PRODUCT.length; i++) {
+                    if (PRODUCT[i].productList[0] != null) {
+                        const NEW_ITEM = TEMPLATE.content.firstElementChild.cloneNode(true);
+
+                        NEW_ITEM.querySelector("#articleNumber1").textContent = PRODUCT[i].productList[0].artikelnummer;
+                        NEW_ITEM.querySelector("#articleName1").textContent = PRODUCT[i].productList[0].titel;
+                        NEW_ITEM.querySelector("#articleLink1").setAttribute("href", "product.html#" + PRODUCT[i].productList[0].artikelnummer);
+                        NEW_ITEM.querySelector("#owner").textContent = PRODUCT[i].owner.email;
+                        // NEW_ITEM.querySelector("#articleDatetime").textContent = PRODUCT[i].datetime;
+                        // NEW_ITEM.querySelector("removeProductButton").textContent = "x";
+
+                        CONTAINER.appendChild(NEW_ITEM);
+                    } else {
+                        EMPTY_LISTS++;
+                    }
+                }
+                if (EMPTY_LISTS === PRODUCT.length) {
+                    document.getElementById("no-reservations1").textContent = "Nothing booked yet."
+                    document.getElementById("itemContainer1").style = "display:none"
+                }
+            } else {
+                document.getElementById("no-reservations1").textContent = "Nothing booked yet."
+                document.getElementById("itemContainer1").style = "display:none"
+            }
+        }).catch(error => {
+            document.getElementById("no-reservations1").textContent = "Nothing booked yet."
+            document.getElementById("itemContainer1").style = "display:none"
+            console.log(error)
+        })
+    }
 }
