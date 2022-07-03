@@ -40,6 +40,21 @@ body {
     display: none;
 }
 
+img {
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:10px;
+}
+
+.has-shadow {
+    -moz-box-shadow: 2px 2px 5px #ccc;
+    -webkit-box-shadow: 2px 2px 5px #ccc;
+    box-shadow: 2px 2px 5px #ccc;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:10px;
+}
+
 /*Rules for tablets/phones (Screens at 1024px or lower)*/
 @media only screen and (max-width: 1024px) {
     /*.codeword {*/
