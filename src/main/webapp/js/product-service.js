@@ -81,7 +81,10 @@ export default class ProductService {
             if (response.ok) {
                 console.log("Succes fetching wishlist...")
                 return response.json();
-            } else throw response.status + " Something wrong happened."
+            } else {
+                document.getElementById("no-wishlist").textContent = "Nothing wishlisted yet."
+                throw response.status + " Something wrong happened."
+            }
         }).then(data => {
             console.log(data);
             const START_INDEX = 0;
