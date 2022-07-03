@@ -242,7 +242,12 @@ export default class ProductService {
                 }
             } else {
                 document.getElementById("no-reservations").textContent = "Nothing booked yet."
+                document.getElementById("itemContainer").style = "display:none"
             }
-        }).catch(error => console.log(error))
+        }).catch(error => {
+            document.getElementById("no-reservations").textContent = "Nothing booked yet."
+            document.getElementById("itemContainer").style = "display:none"
+            console.log(error)
+        })
     }
 }
