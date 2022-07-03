@@ -150,4 +150,99 @@ export default class ProductService {
             return data.success === "This product is in your wishlist";
         }).catch(error => console.log(error))
     }
+
+    bookProduct(number) {
+        const URL = 'http://localhost:8080/restservices/book/bookproduct';
+        const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
+
+        const TODAY = new Date();
+        const DATE = TODAY.getDate() + "-" + (TODAY.getMonth() + 1) + "-" + TODAY.getFullYear();
+        const TIME = TODAY.getHours() + ":" + TODAY.getMinutes() + ":" + TODAY.getSeconds();
+        const DATE_TIME = DATE + " " + TIME;
+
+        let jsonRequestBody = {
+            "article_number": number,
+            "datetime": DATE_TIME
+        };
+
+        let fetchOptions = {
+            method: "POST",
+            body: JSON.stringify(jsonRequestBody),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + LOCAL_TOKEN
+            }
+        }
+
+        return fetch(URL, fetchOptions).then(response => {
+            if (response.ok) {
+                return response.json();
+            } else throw response.status + " Something wrong happened"
+        }).then(data => {
+            return data.success === "Booking has been made";
+        }).catch(error => console.log(error));
+    }
+
+    getBookingFromBookings(number) {
+        const URL = "http://localhost:8080/restservices/book/" + number;
+        const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
+
+        let fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + LOCAL_TOKEN
+            }
+        }
+
+        return fetch(URL, fetchOptions).then(response => {
+            if (response.ok) {
+                return response.json();
+            } else throw "Product has not yet been booked"
+        }).then(data => {
+            return data.success === "This product has already been booked";
+        }).catch(error => console.log(error))
+    }
+
+    getBookingsFromUser() {
+        const URL = 'http://localhost:8080/restservices/book/user';
+        const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
+
+        let fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + LOCAL_TOKEN
+            }
+        }
+
+        return fetch(URL, fetchOptions).then(response => {
+            if (response.ok) {
+                console.log("Succes fetching user bookings...")
+                return response.json();
+            } else throw response.status + " Something wrong happened."
+        }).then(data => {
+            console.log(data);
+            const START_INDEX = 0;
+            const PRODUCT = data;
+            const CONTAINER = document.getElementById("itemContainer");
+            const TEMPLATE = document.getElementById("item");
+
+            if (PRODUCT.length !== 0) {
+                for (let i = START_INDEX; i < PRODUCT.length; i++) {
+                    const NEW_ITEM = TEMPLATE.content.firstElementChild.cloneNode(true);
+
+                    NEW_ITEM.querySelector("#articleNumber").textContent = PRODUCT[i].artikelnummer;
+                    NEW_ITEM.querySelector("#articleName").textContent = PRODUCT[i].titel;
+                    NEW_ITEM.querySelector("#articleLink").setAttribute("href", "product.html#" + PRODUCT[i].artikelnummer);
+                    // NEW_ITEM.querySelector("#articleDatetime").textContent = PRODUCT[i].datetime;
+                    // NEW_ITEM.querySelector("removeProductButton").textContent = "x";
+
+                    CONTAINER.appendChild(NEW_ITEM);
+                }
+            } else {
+                document.getElementById("no-reservations").textContent = "Nothing booked yet."
+            }
+        }).catch(error => console.log(error))
+    }
 }

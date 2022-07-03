@@ -15,6 +15,9 @@ let ARTICLE_NUMBER = window.location.hash[1];
 const ADD_TO_WISHLIST_BUTTON = document.getElementById("addToWishlistButton");
 const WISHLIST_BUTTON_TEXT = document.getElementById("wishlistButtonText");
 const WISHLIST_DIV = document.getElementById("displayWishList");
+const DISPLAY_USER_RESERVATIONS = document.getElementById("displayUserReservations");
+const BOOK_PRODUCT_BUTTON = document.getElementById("bookProduct");
+const BOOK_PRODUCT_TEXT = document.getElementById("bookProductText");
 // const PRODUCT_NR = document.getElementById("productArticleNumber").value;
 // const PRODUCT_TITLE = document.getElementById("productTitle").value;
 // const PRODUCT_IMG = document.getElementById("productImage").value;
@@ -80,8 +83,36 @@ if (ADD_TO_WISHLIST_BUTTON && ARTICLE_NUMBER) {
 }
 
 if (WISHLIST_DIV) {
-    console.log("hi")
-    service.getWishlist()
+    service.getWishlist();
+}
+
+if (BOOK_PRODUCT_BUTTON && BOOK_PRODUCT_TEXT && ARTICLE_NUMBER) {
+    service.getBookingFromBookings(ARTICLE_NUMBER).then(response => {
+        if (response) {
+            BOOK_PRODUCT_TEXT.textContent = "Unbook this product";
+            BOOK_PRODUCT_BUTTON.classList.add("booked");
+        } else {
+            BOOK_PRODUCT_TEXT.textContent = "Book this product";
+            BOOK_PRODUCT_BUTTON.classList.remove("booked");
+        }
+    });
+
+    BOOK_PRODUCT_BUTTON.addEventListener("click", e => {
+        e.preventDefault();
+        service.bookProduct(ARTICLE_NUMBER).then(response => {
+            if (response) {
+                BOOK_PRODUCT_TEXT.textContent = "Unbook this product";
+                BOOK_PRODUCT_BUTTON.classList.add("booked");
+            } else {
+                BOOK_PRODUCT_TEXT.textContent = "Book this product";
+                BOOK_PRODUCT_BUTTON.classList.remove("booked");
+            }
+        })
+    })
+}
+
+if (DISPLAY_USER_RESERVATIONS) {
+    service.getBookingsFromUser();
 }
 
 refresh();

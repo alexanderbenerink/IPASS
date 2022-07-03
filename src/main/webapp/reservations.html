@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Settings | Tommy Bishoppe</title>
+    <title>Reservations | Tommy Bishoppe</title>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -76,47 +76,44 @@
                         <hr>
                         <div class="tabs is-centered">
                             <ul>
-                                <li id="reservationsLink"><a href="reservations.html">Reservations</a></li>
+                                <li id="reservationsLink" class="is-active"><a href="reservations.html">Reservations</a></li>
                                 <li id="wishlistLink"><a href="wishlist.html">Wishlist</a></li>
-                                <li id="addProductLink"><a href="addproduct.html">New product</a></li>
+                                <li id="addProductLink"><a>New product</a></li>
                                 <li id="statisticsLink"><a>Statistics</a></li>
-                                <li class="is-active"><a>Settings</a></li>
+                                <li><a href="account.html">Settings</a></li>
                             </ul>
                         </div>
                         <hr>
                     </div>
                 </div>
                 <div class="columns is-centered">
-                    <!-- Input fields for password change -->
                     <div class="column is-6">
-                        <form id="modifyPasswordForm">
-                            <p class="subtitle has-text-centered">Change password</p>
-                            <div class="field">
-                                <label for="oldpassword">
-                                    <p>Enter your old password:</p>
-                                    <br>
-                                    <input id="oldpassword" type="password" class="input" placeholder="Old password" required>
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label for="newpassword">
-                                    <p>Enter a new password:</p>
-                                    <br>
-                                    <input id="newpassword" type="password" class="input" placeholder="12 characters, a-Z and atleast 1 special character" required>
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label for="confirmnewpassword">
-                                    <p>Confirm new password</p>
-                                    <br>
-                                    <input id="confirmnewpassword" type="password" class="input" placeholder="Confirm new password">
-                                </label>
-                            </div>
-                            <hr>
-                            <div class="field has-text-centered">
-                                <button type="submit" class="button">Submit</button>
-                            </div>
-                        </form>
+                        <!-- Item(s) in booking(s) here -->
+                        <div id="displayUserReservations">
+                            <p id="no-reservations" class="subtitle"></p>
+                            <!--                    <div id="itemContainer" class="columns is-multiline is-centered">-->
+                            <table id="itemContainer" class="table is-fullwidth">
+                                <thead>
+                                <tr>
+                                    <th>Article number</th>
+                                    <th>Product name</th>
+                                    <!--                                        <th>Date booking</th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <template id="item">
+                                    <tr>
+                                        <th id="articleNumber"></th>
+                                        <td>
+                                            <a id="articleLink"><p id="articleName"></p></a>
+                                        </td>
+                                        <!--                                        <td id="articleDatetime"></td>-->
+                                    </tr>
+                                </template>
+                                </tbody>
+                            </table>
+                            <!--                    </div>-->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,5 +133,6 @@
 </section>
 <script type="application/javascript" src="js/functions.js"></script>
 <script type="module" src="js/login.js"></script>
+<script type="module" src="js/product.js"></script>
 </body>
 </html>

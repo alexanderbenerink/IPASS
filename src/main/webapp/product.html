@@ -67,7 +67,7 @@
         <!-- Body -->
         <div class="hero-body">
             <div class="container has-text-centered">
-                <div class="columns">
+                <div class="columns is-vcentered">
                     <div class="column">
                         <img id="image" src="#" alt="Image of product" width="400">
                     </div>
@@ -75,29 +75,32 @@
                         <h1 id="title" class="title">Product</h1>
                         <blockquote id="description">Description</blockquote>
                         <hr>
-                        <form id="reservationForm">
-                            <h1 class="subtitle">Get this item</h1>
-                            <div class="columns is-centered">
-                                <div class="column is-8">
-                                    <br>
-                                    <div class="field">
-                                        <label for="firstName">First name:</label>
-                                        <input id="firstName" type="text" class="input">
-                                    </div>
-                                    <div class="field">
-                                        <label for="email">E-mail:</label>
-                                        <input id="email" type="email" class="input" required>
-                                    </div>
-                                    <div class="field">
-                                        <label for="message">Message:</label>
-                                        <textarea id="message" class="input"></textarea>
-                                    </div>
-                                    <div class="field">
-                                        <button id="sendMessage" class="button" type="submit">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+<!--                        <form id="reservationForm">-->
+<!--                            <h1 class="subtitle">Get this item</h1>-->
+<!--                            <div class="columns is-centered">-->
+<!--                                <div class="column is-8">-->
+<!--                                    <br>-->
+<!--                                    <div class="field">-->
+<!--                                        <label for="firstName">First name:</label>-->
+<!--                                        <input id="firstName" type="text" class="input">-->
+<!--                                    </div>-->
+<!--                                    <div class="field">-->
+<!--                                        <label for="email">E-mail:</label>-->
+<!--                                        <input id="email" type="email" class="input" required>-->
+<!--                                    </div>-->
+<!--                                    <div class="field">-->
+<!--                                        <label for="message">Message:</label>-->
+<!--                                        <textarea id="message" class="input"></textarea>-->
+<!--                                    </div>-->
+<!--                                    <div class="field">-->
+<!--                                        <button id="sendMessage" class="button" type="submit">Submit</button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
+                        <div class="field">
+                            <button id="bookProduct" class="button" type="submit"><span id="bookProductText">Book this item</span></button>
+                        </div>
                     </div>
                     <div class="column is-1">
                         <button id="removeProductButton" class="button remove-product">x</button>

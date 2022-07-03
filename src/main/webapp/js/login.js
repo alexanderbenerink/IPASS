@@ -19,10 +19,12 @@ const LOGOUT_BUTTON = document.links.logoutbutton;
 const WISHLIST_LINK = document.getElementById("wishlistLink");
 const ADMIN_ELEMENTS = [document.getElementById("addProductLink"), document.getElementById("statisticsLink")];
 const DISPLAY_USERNAME = document.getElementById("displayUsername");
+const RESERVATION_LINK = document.getElementById("reservationsLink");
 // let REMOVE_PRODUCT_BUTTON = document.getElementsByClassName("remove-product");
 // let ADD_TO_WISHLIST_BUTTON = document.getElementsByClassName("wishlist-button");
 let PRODUCT_REMOVE = document.getElementById("removeProductButton");
 let WISHLIST_ADD = document.getElementById("addToWishlistButton");
+let BOOK_PRODUCT = document.getElementById("bookProduct");
 let USERNAME = "";
 let IS_ADMIN = "";
 
@@ -75,7 +77,10 @@ function refresh() {
         if (DISPLAY_USERNAME) { DISPLAY_USERNAME.textContent = USERNAME; }
 
         if (IS_ADMIN === "admin") {
-            if (WISHLIST_LINK) { WISHLIST_LINK.style = "display:none" }
+            if (WISHLIST_LINK && RESERVATION_LINK) {
+                WISHLIST_LINK.style = "display:none"
+                RESERVATION_LINK.style = "display:none"
+            }
             // if (ADD_TO_WISHLIST_BUTTON) { ADD_TO_WISHLIST_BUTTON.style = "display:none" }
             if (WISHLIST_ADD) { WISHLIST_ADD.style = "display:none" }
         } else if (IS_ADMIN === "user") {
@@ -91,10 +96,12 @@ function refresh() {
             LOGIN_BUTTON.style = "display:inherit";
             REGISTER_BUTTON.style = "display:inherit";
         }
-        if (PRODUCT_REMOVE && WISHLIST_ADD) {
+        if (PRODUCT_REMOVE && WISHLIST_ADD && BOOK_PRODUCT) {
             PRODUCT_REMOVE.style = "display:none";
             WISHLIST_ADD.setAttribute("disabled", "");
             WISHLIST_ADD.setAttribute("title", "You must log in first before you can do this!");
+            BOOK_PRODUCT.setAttribute("disabled", "");
+            BOOK_PRODUCT.setAttribute("title", "You must log in first before you can do this!");
         }
         // console.log(ADD_TO_WISHLIST_BUTTON.length)
         // if (ADD_TO_WISHLIST_BUTTON && REMOVE_PRODUCT_BUTTON) {
