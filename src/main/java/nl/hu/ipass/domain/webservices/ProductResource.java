@@ -93,6 +93,22 @@ public class ProductResource {
     public Response removeProduct(@Context SecurityContext sc, @PathParam("productId") int productId) {
         if (sc.getUserPrincipal() instanceof Gebruiker) {
             Product current = Product.getProductByName(productId);
+
+            List<Verlanglijst> allWishlists = Verlanglijst.getAllWishLists();
+            List<Reservering> allReservations = Reservering.getAllBookings();
+
+            for (Verlanglijst wishlist : allWishlists) {
+                if (wishlist.getProductList().contains(current)) {
+                    wishlist.removeProduct(current);
+                }
+            }
+
+            for (Reservering reservation : allReservations) {
+                if (reservation.getProductList().contains(current)) {
+                    reservation.removeProduct(current);
+                }
+            }
+
             Product.removeProduct(current);
             return Response.ok().build();
         }
