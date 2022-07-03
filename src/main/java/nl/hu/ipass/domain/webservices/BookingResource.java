@@ -44,7 +44,9 @@ public class BookingResource {
                 Product product = Product.getProductByName(request.article_number);
                 Reservering booking = Reservering.getAllBookings().stream().filter(e->e.getOwner().equals(sc.getUserPrincipal())).findFirst().orElse(null);
                 if (booking == null) {
-                    new Reservering(current, request.datetime);
+                    Reservering rv = new Reservering(current);
+                    rv.addProductToReservering(product);
+                    return Response.ok(new AbstractMap.SimpleEntry<>(SUCCESS, "Booking has been made")).build();
                 }
                 if (booking.getProductList().contains(product)) {
                     booking.removeProduct(product);

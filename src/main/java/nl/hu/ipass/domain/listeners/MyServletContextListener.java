@@ -23,6 +23,7 @@ public class MyServletContextListener implements ServletContextListener, HttpSes
         PersistenceManager.loadUsersFromAzure();
         PersistenceManager.loadProductsFromAzure();
         PersistenceManager.loadWishlistsFromAzure();
+        PersistenceManager.loadReservationsFromAzure();
 
         System.out.println(Gebruiker.getAlleGebruikers());
 
@@ -37,6 +38,7 @@ public class MyServletContextListener implements ServletContextListener, HttpSes
         PersistenceManager.saveUsersToAzure();
         PersistenceManager.saveProductsToAzure();
         PersistenceManager.saveWishlistsToAzure();
+        PersistenceManager.saveReservationsToAzure();
 
         Schedulers.shutdownNow();
         HttpResources.disposeLoopsAndConnectionsLater(Duration.ZERO, Duration.ZERO).block();

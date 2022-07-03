@@ -155,14 +155,14 @@ export default class ProductService {
         const URL = 'http://localhost:8080/restservices/book/bookproduct';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
 
-        const TODAY = new Date();
-        const DATE = TODAY.getDate() + "-" + (TODAY.getMonth() + 1) + "-" + TODAY.getFullYear();
-        const TIME = TODAY.getHours() + ":" + TODAY.getMinutes() + ":" + TODAY.getSeconds();
-        const DATE_TIME = DATE + " " + TIME;
+        // const TODAY = new Date();
+        // const DATE = TODAY.getDate() + "-" + (TODAY.getMonth() + 1) + "-" + TODAY.getFullYear();
+        // const TIME = TODAY.getHours() + ":" + TODAY.getMinutes() + ":" + TODAY.getSeconds();
+        // const DATE_TIME = DATE + " " + TIME;
 
         let jsonRequestBody = {
-            "article_number": number,
-            "datetime": DATE_TIME
+            "article_number": number
+            // "datetime": DATE_TIME
         };
 
         let fetchOptions = {

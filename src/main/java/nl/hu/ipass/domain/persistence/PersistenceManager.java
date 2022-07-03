@@ -5,6 +5,7 @@ import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobContainerClientBuilder;
 import nl.hu.ipass.domain.model.Gebruiker;
 import nl.hu.ipass.domain.model.Product;
+import nl.hu.ipass.domain.model.Reservering;
 import nl.hu.ipass.domain.model.Verlanglijst;
 
 import java.io.*;
@@ -238,6 +239,66 @@ public class PersistenceManager {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(wishlistsToSave);
+
+            byte[] bytez = baos.toByteArray();
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(bytez);
+            blob.upload(bais, bytez.length, true);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    // Save to and load reservations from Azure
+
+    public static void loadReservationsFromAzure() {
+        // Maak verbinding
+        // Ga bytes schuiven
+        // Plaats reserveringen in Reservering klasse
+        try {
+            if (blobContainerClient.exists()) {
+                BlobClient blob = blobContainerClient.getBlobClient("reservations");
+
+                if (blob.exists()) {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    blob.download(baos);
+
+                    ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                    ObjectInputStream ois = new ObjectInputStream(bais);
+
+                    List<Reservering> allReservations = (List<Reservering>) ois.readObject();
+
+                    for (Reservering reservation : allReservations) {
+                        Reservering rv = new Reservering(reservation.getOwner());
+
+                        for (Product product : reservation.getProductList()) {
+                            rv.addProductToReservering(product);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveReservationsToAzure() {
+        // Haal de reserveringen op
+        // Connect
+        // Stream
+        try {
+            if (!blobContainerClient.exists()) {
+                blobContainerClient.create();
+            }
+
+            BlobClient blob = blobContainerClient.getBlobClient("reservations");
+            List<Reservering> reservationsToSave = Reservering.getAllBookings();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(reservationsToSave);
 
             byte[] bytez = baos.toByteArray();
 

@@ -83,6 +83,8 @@ function refresh() {
             }
             // if (ADD_TO_WISHLIST_BUTTON) { ADD_TO_WISHLIST_BUTTON.style = "display:none" }
             if (WISHLIST_ADD) { WISHLIST_ADD.style = "display:none" }
+            if (BOOK_PRODUCT) { BOOK_PRODUCT.style = "display:none" }
+
         } else if (IS_ADMIN === "user") {
             // if (REMOVE_PRODUCT_BUTTON) { REMOVE_PRODUCT_BUTTON.style = "display:none" }
             if (PRODUCT_REMOVE) { PRODUCT_REMOVE.style = "display:none"; }
