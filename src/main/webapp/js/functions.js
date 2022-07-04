@@ -18,6 +18,11 @@ let searchInput = document.getElementById('searchbox');
 * Functions
 */
 
+/**
+ * Verify codeword
+ * @param {event} event result of eventlistener
+ * @returns {Promise<void>}
+ */
 async function sendJsonData(event) {
     const CODEWORD = document.getElementById("codeword");
 
@@ -46,6 +51,10 @@ async function sendJsonData(event) {
     });
 }
 
+/**
+ * Get the top 3 most popular items
+ * @returns {Promise<void>}
+ */
 async function showMostPopularItems() {
     await fetch("restservices/product").then(e => e.json()).then(json => {
         const PRODUCT = json;
@@ -70,6 +79,10 @@ async function showMostPopularItems() {
     }).catch(error => console.log(error));
 }
 
+/**
+ * Get all products
+ * @returns {Promise<void>}
+ */
 async function showAllItems() {
     await fetch("restservices/product").then(e => e.json()).then(json => {
         const PRODUCT = json;
@@ -90,6 +103,10 @@ async function showAllItems() {
     }).catch(error => console.log(error));
 }
 
+/**
+ * Register a new account
+ * @returns {Promise<void>}
+ */
  function registerNewAccount() {
     const USERNAME = document.getElementById("usernameField");
     const EMAIL = document.getElementById("emailField");
@@ -128,44 +145,10 @@ async function showAllItems() {
         });
 }
 
-// function loginToAccount() {
-//     const USERNAME = document.getElementById("loginUsername");
-//     const PASSWORD = document.getElementById("loginPassword");
-//
-//     let jsonRequestBody = {
-//         "username": USERNAME.value,`
-//         "password": PASSWORD.value
-//     }
-//
-//     let fetchOptions = {
-//         method: "POST",
-//         body: JSON.stringify(jsonRequestBody),
-//         headers: {'Content-Type': 'application/json'}
-//     }
-//
-//     fetch('restservices/account/login', fetchOptions)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error(response.status);
-//             }
-//
-//             //TODO: Receive JWT token and save to localstorage so you have a different state? (USE BATTLESNAKE)
-//
-//             return console.log(response.status + "\nSuccesful login.")
-//             // return window.location.replace("login.html");
-//         })
-//         .catch((error) => {
-//             const STATUS_BAD_LOGIN = 401;
-//             let message = error;
-//
-//             if (Number(error.message) === STATUS_BAD_LOGIN) {
-//                 message = "Account doesn't exist!";
-//             }
-//             //TODO: Errors are now logged in console, but make it user-friendly by showing it on page
-//             throw new Error(message);
-//         })
-// }
-
+/**
+ * Change the password
+ * @returns {Promise<void>}
+ */
 function changePassword() {
     const OLD_PASSWORD = document.getElementById("oldpassword")
     const NEW_PASSWORD = document.getElementById("newpassword")
@@ -198,6 +181,10 @@ function changePassword() {
         }).catch(error => console.log(error))
 }
 
+/**
+ * Get product information
+ * @returns {Promise<void>}
+ */
 function showItem() {
     let ARTICLE_NUMBER = window.location.hash[1]
     const URL = "restservices/product/" + ARTICLE_NUMBER;
@@ -217,6 +204,12 @@ function showItem() {
     })
 }
 
+/**
+ * Shorten a description to given max length
+ * @param {string} description original description
+ * @param {int} maxLength given max length in numbers
+ * @returns {string}
+ */
 function shortDescription(description, maxLength) {
     const START_INDEX = 0
     const SPACETAB = " ";
@@ -231,7 +224,11 @@ function shortDescription(description, maxLength) {
     return shorterDescription;
 }
 
-// Source: https://css-tricks.com/in-page-filtered-search-with-vanilla-javascript/
+/**
+ * Rudimentarily search for products.
+ * Source: https://css-tricks.com/in-page-filtered-search-with-vanilla-javascript/
+ * @returns {void}
+ */
 function liveSearch() {
     // Locate the card elements
     let cards = document.querySelectorAll('.searchable')
@@ -256,6 +253,7 @@ function liveSearch() {
 * EventListeners
 */
 
+// Send codeword
 if (CODEWORD_FORM){
     CODEWORD_FORM.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -263,6 +261,7 @@ if (CODEWORD_FORM){
     });
 }
 
+// Register new account
 if (REGISTER_FORM) {
     REGISTER_FORM.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -270,13 +269,7 @@ if (REGISTER_FORM) {
     })
 }
 
-if (LOGIN_FORM) {
-    LOGIN_FORM.addEventListener("submit", function(event) {
-        event.preventDefault();
-        loginToAccount();
-    })
-}
-
+// Modify password
 if (MODIFY_PASSWORD_FORM){
     MODIFY_PASSWORD_FORM.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -284,6 +277,7 @@ if (MODIFY_PASSWORD_FORM){
     });
 }
 
+// Search products
 if (searchInput) {
     searchInput.addEventListener('keyup', () => {
         clearTimeout(typingTimer);
@@ -291,6 +285,7 @@ if (searchInput) {
     });
 }
 
+// Bulma docs javascript code for hamburger menu on mobile
 document.addEventListener('DOMContentLoaded', () => {
 
     // Get all "navbar-burger" elements

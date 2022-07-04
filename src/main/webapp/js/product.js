@@ -25,17 +25,10 @@ const BOOK_PRODUCT_TEXT = document.getElementById("bookProductText");
 // const PRODUCT_DESC = document.getElementById("productDescription").value;
 
 /*
-* Functions
-*/
-
-function refresh() {
-
-}
-
-/*
 * EventListeners
 */
 
+// Add product
 if (PRODUCT_FORM) {
     PRODUCT_FORM.addEventListener("submit", e => {
         e.preventDefault();
@@ -45,6 +38,7 @@ if (PRODUCT_FORM) {
     })
 }
 
+// Remove product
 if (PRODUCT_REMOVE && ARTICLE_NUMBER) {
     PRODUCT_REMOVE.addEventListener("click", e => {
         e.preventDefault();
@@ -54,6 +48,7 @@ if (PRODUCT_REMOVE && ARTICLE_NUMBER) {
     })
 }
 
+// Check to see if product is in wishlist, and if so, update front-end to correspond state
 if (ADD_TO_WISHLIST_BUTTON && ARTICLE_NUMBER) {
     service.getProductFromWishlist(ARTICLE_NUMBER).then(response => {
         if (response) {
@@ -83,10 +78,12 @@ if (ADD_TO_WISHLIST_BUTTON && ARTICLE_NUMBER) {
     })
 }
 
+// Get user wishlist
 if (WISHLIST_DIV) {
     service.getWishlist();
 }
 
+// Check to see if product is in reservation, and if so, update front-end to correspond state
 if (BOOK_PRODUCT_BUTTON && BOOK_PRODUCT_TEXT && ARTICLE_NUMBER) {
     service.getBookingFromBookings(ARTICLE_NUMBER).then(response => {
         if (response) {
@@ -112,12 +109,12 @@ if (BOOK_PRODUCT_BUTTON && BOOK_PRODUCT_TEXT && ARTICLE_NUMBER) {
     })
 }
 
+// Get bookings from user
 if (DISPLAY_USER_RESERVATIONS) {
     service.getBookingsFromUser();
 }
 
+// Get all user bookings
 if (DISPLAY_ALL_RESERVATIONS) {
     service.getAllBookings();
 }
-
-refresh();

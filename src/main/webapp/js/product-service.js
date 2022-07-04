@@ -1,5 +1,13 @@
 export default class ProductService {
-    //TODO: Functies...
+
+    /**
+     * Add a product
+     * @param {int} number product article number
+     * @param {string} title product title
+     * @param {string} image product image
+     * @param {string} description product description
+     * @returns {Promise<void>}
+     */
     async addProduct(number, title, image, description) {
         const toBase64 = image => new Promise((resolve, reject) => {
             if (image === undefined) resolve("");
@@ -38,6 +46,11 @@ export default class ProductService {
         }).catch(error => console.log(error));
     }
 
+    /**
+     * Add a product to the user wishlist
+     * @param {int} number article number of the product needed to add to the wishlist
+     * @returns {Promise<void>}
+     */
     addProductToWishlist(number) {
         const URL = 'restservices/product/addtowishlist';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
@@ -65,6 +78,11 @@ export default class ProductService {
 
     }
 
+    /**
+     * Get the user wishlist
+     * TODO: Add seperation of concern by only returning the promise
+     * @returns {Promise<void>}
+     */
     getWishlist() {
         const URL = 'restservices/product/wishlist';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
@@ -110,6 +128,11 @@ export default class ProductService {
         }).catch(error => console.log(error))
     }
 
+    /**
+     * Remove a product
+     * @param {int} number article number of the product needed to remove
+     * @returns {Promise<void>}
+     */
     removeProduct(number) {
         const URL = "restservices/product/remove/" + number;
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
@@ -133,6 +156,11 @@ export default class ProductService {
         }).catch(error => console.log(error))
     }
 
+    /**
+     * Get a product from the user wishlist
+     * @param {int} number article number of the product needed in order to fetch it
+     * @returns {Promise<void>}
+     */
     getProductFromWishlist(number) {
         const URL = "restservices/product/wishlist/" + number;
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
@@ -154,6 +182,11 @@ export default class ProductService {
         }).catch(error => console.log(error))
     }
 
+    /**
+     * Book a product
+     * @param {int} number article number of the product needed in order to book it
+     * @returns {Promise<void>}
+     */
     bookProduct(number) {
         const URL = 'restservices/book/bookproduct';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
@@ -186,6 +219,11 @@ export default class ProductService {
         }).catch(error => console.log(error));
     }
 
+    /**
+     * Get a booking from the user for verification
+     * @param {int} number product article number
+     * @returns {Promise<void>}
+     */
     getBookingFromBookings(number) {
         const URL = "restservices/book/" + number;
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
@@ -207,6 +245,10 @@ export default class ProductService {
         }).catch(error => console.log(error))
     }
 
+    /**
+     * Get all bookings from the user
+     * @returns {Promise<void>}
+     */
     getBookingsFromUser() {
         const URL = 'restservices/book/user';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");
@@ -254,6 +296,10 @@ export default class ProductService {
         })
     }
 
+    /**
+     * Get every booking made by all users
+     * @returns {Promise<void>}
+     */
     getAllBookings() {
         const URL = 'restservices/book/allbookings';
         const LOCAL_TOKEN = window.sessionStorage.getItem("myJWT");

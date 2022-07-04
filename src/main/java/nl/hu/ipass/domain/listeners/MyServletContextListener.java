@@ -28,7 +28,7 @@ public class MyServletContextListener implements ServletContextListener, HttpSes
         System.out.println(Gebruiker.getAlleGebruikers());
 
         // If the Thomas account exists, make it admin.
-        Gebruiker opdrachtgever = Gebruiker.getUserByName("Thomas");
+        Gebruiker opdrachtgever = Gebruiker.getUserByName("TommyBishoppe");
         if (opdrachtgever != null) {opdrachtgever.makeAdmin();}
     }
 
