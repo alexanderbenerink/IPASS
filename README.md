@@ -3,6 +3,8 @@ SD Individual Propedeuse Assessment
 
 Docent: Stef Joseph-Kruyswijk
 
+Project wordt gehost op: https://ipassflashtattoo.herokuapp.com/
+
 # Installatiehandleiding
 ## Benodigdheden
 - Een ontwikkelomgeving zoals IntelliJ Idea of Visual Studio Code 
